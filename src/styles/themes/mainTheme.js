@@ -1,3 +1,5 @@
+import { css } from 'styled-components';
+
 const mainTheme = {
   colors: {
     text: '#272D3B',
@@ -22,6 +24,12 @@ const mainTheme = {
     regular: 400,
     semiBold: 600,
     bold: 700,
+  },
+
+  mixins: {
+    views: css`
+      flex-grow: 1;
+    `,
   },
 };
 

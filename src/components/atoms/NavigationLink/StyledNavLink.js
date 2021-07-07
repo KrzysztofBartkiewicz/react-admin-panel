@@ -15,16 +15,16 @@ export const StyledLeftBorder = styled.div`
 export const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
   display: flex;
   align-items: center;
-  height: 2.8rem;
+  height: 3rem;
   font-size: ${({ theme }) => theme.fontSizes.s};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.white};
-  opacity: 0.74;
+  opacity: 0.64;
 
   svg {
     margin: 0 3.2rem 0 1.8rem;
-    width: 3.2rem;
-    height: auto;
+    width: auto;
+    height: 100%;
     fill: ${({ theme }) => theme.colors.white};
   }
 

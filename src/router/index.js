@@ -4,6 +4,9 @@ import routes from './routes';
 import NavigationTemplate from '../templates/NavigationTemplate';
 import Home from '../views/Home';
 import Orders from '../views/Orders';
+import Charts from '../views/Charts';
+import Filter from '../views/Filter';
+import Settings from '../views/Settings';
 
 const Router = () => {
   return (
@@ -12,6 +15,9 @@ const Router = () => {
         <Switch>
           <Route exact path={routes.home} component={Home} />
           <Route path={routes.orders} component={Orders} />
+          <Route path={routes.charts} component={Charts} />
+          <Route path={routes.filter} component={Filter} />
+          <Route path={routes.settings} component={Settings} />
         </Switch>
       </NavigationTemplate>
     </BrowserRouter>
