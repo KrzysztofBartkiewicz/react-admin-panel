@@ -6,6 +6,7 @@ const mainTheme = {
     blueLight: '#F4F7FE',
     pink: '#FF007C',
     velvet: '#7D00B5',
+    white: '#fff',
   },
 
   fontSizes: {

@@ -1,7 +1,13 @@
 import React from 'react';
+import Navbar from '../components/organisms/Navbar';
 
-const NavigationTemplate = () => {
-  return <div></div>;
+const NavigationTemplate = ({ children }) => {
+  return (
+    <>
+      <Navbar />
+      {children}
+    </>
+  );
 };
 
 export default NavigationTemplate;
