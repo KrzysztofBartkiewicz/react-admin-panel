@@ -7,8 +7,8 @@ import materialTheme from '../styles/themes/materialTheme';
 
 const GlobalStylesTemplate = ({ children }) => (
   <ThemeProvider theme={mainTheme}>
-    <GlobalStyle />
     <MaterialThemeProvider theme={materialTheme}>
+      <GlobalStyle />
       {children}
     </MaterialThemeProvider>
   </ThemeProvider>
