@@ -2,7 +2,7 @@ import actionsTypes from '../actions/actionsTypes';
 
 const initialState = { orders: [] };
 
-const rootReducer = (state = initialState, action) => {
+const ordersReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -17,4 +17,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rootReducer;
+export default ordersReducer;

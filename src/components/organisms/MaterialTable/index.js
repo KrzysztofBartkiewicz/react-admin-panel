@@ -21,7 +21,13 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-const MaterialTable = ({ data, headCells }) => {
+const MaterialTable = ({
+  data,
+  headCells,
+  tableType,
+  onItemsClickFn,
+  tableTitle,
+}) => {
   const rows = data;
 
   function descendingComparator(a, b, orderBy) {
@@ -159,7 +165,7 @@ const MaterialTable = ({ data, headCells }) => {
             id="tableTitle"
             component="div"
           >
-            Nutrition
+            {tableType === 'orders' ? 'All orders' : tableTitle}
           </Typography>
         )}
 
@@ -205,6 +211,12 @@ const MaterialTable = ({ data, headCells }) => {
       position: 'absolute',
       top: 20,
       width: 1,
+    },
+    itemsCell: {
+      cursor: 'pointer',
+      '&:hover': {
+        fontWeight: 500,
+      },
     },
   }));
 
@@ -313,27 +325,79 @@ const MaterialTable = ({ data, headCells }) => {
                             inputProps={{ 'aria-labelledby': labelId }}
                           />
                         </TableCell>
-                        {Object.values(row).map((value, index) => {
-                          if (index === 0) {
-                            return (
-                              <TableCell
-                                key={index}
-                                component="th"
-                                id={labelId}
-                                scope="row"
-                                padding="none"
-                              >
-                                {value}
-                              </TableCell>
-                            );
-                          }
-                          return (
-                            <TableCell key={index} align="right">
-                              {value}
-                            </TableCell>
-                          );
-                        })}
-                        <TableCell align="right">{row.protein}</TableCell>
+
+                        {tableType === 'orders' ? (
+                          <>
+                            {Object.values(row).map((value, index) => {
+                              console.log(value);
+                              if (index === 0) {
+                                return (
+                                  <TableCell
+                                    key={index}
+                                    component="th"
+                                    id={labelId}
+                                    scope="row"
+                                    padding="none"
+                                  >
+                                    {value}
+                                  </TableCell>
+                                );
+                              }
+                              return index === 2 ? (
+                                <Tooltip
+                                  key={index}
+                                  title="Click to show items"
+                                >
+                                  <TableCell
+                                    className={classes.itemsCell}
+                                    align="right"
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      onItemsClickFn(row.id);
+                                    }}
+                                  >
+                                    {value}
+                                  </TableCell>
+                                </Tooltip>
+                              ) : (
+                                <TableCell key={index} align="right">
+                                  {value}
+                                </TableCell>
+                              );
+                            })}
+                          </>
+                        ) : tableType === 'items' ? (
+                          <>
+                            {Object.values(row).map((value, index) => {
+                              console.log(value);
+                              if (index === 0) {
+                                return (
+                                  <TableCell
+                                    key={index}
+                                    component="th"
+                                    id={labelId}
+                                    scope="row"
+                                    padding="none"
+                                  >
+                                    {value}
+                                  </TableCell>
+                                );
+                              }
+                              if (index === Object.values(row).length - 1) {
+                                return (
+                                  <TableCell key={index} align="right">
+                                    <a href={value}>Open image</a>
+                                  </TableCell>
+                                );
+                              }
+                              return (
+                                <TableCell key={index} align="right">
+                                  {value}
+                                </TableCell>
+                              );
+                            })}
+                          </>
+                        ) : null}
                       </TableRow>
                     );
                   })}
