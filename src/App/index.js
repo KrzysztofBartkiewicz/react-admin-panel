@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import GlobalStylesTemplate from '../templates/GlobalStylesTemplate';
 import Router from '../router';
-import { connect } from 'react-redux';
-import { getOrders } from '../redux/actions';
 import { allOrdersCollection } from '../firebase/firestoreUtils';
+import { useDispatch } from 'react-redux';
+import { setOrders } from '../redux/actions';
 
-const App = ({ getOrders }) => {
+const App = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const subscribe = allOrdersCollection.onSnapshot((snapshot) => {
       const dataFromOrdersCollections = snapshot.docs.map((doc) => {
@@ -14,7 +16,7 @@ const App = ({ getOrders }) => {
           ...doc.data(),
         };
       });
-      getOrders(dataFromOrdersCollections);
+      dispatch(setOrders(dataFromOrdersCollections));
     });
   }, []);
 
@@ -25,8 +27,4 @@ const App = ({ getOrders }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getOrders: (orders) => dispatch(getOrders(orders)),
-});
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;

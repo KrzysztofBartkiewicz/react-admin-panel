@@ -2,8 +2,12 @@ import React from 'react';
 import Heading from '../../components/atoms/Heading';
 import MaterialTable from '../../components/organisms/MaterialTable';
 import { StyledOrders } from './StyledOrders';
-import { handleItemsModalVisibility } from '../../redux/actions';
-import { connect } from 'react-redux';
+import {
+  handleModalVisibility,
+  setCurrentCustomerId,
+} from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOrders } from '../../redux/selectors';
 
 const orderCells = [
   { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
@@ -15,7 +19,10 @@ const orderCells = [
   { id: 'price', numeric: true, disablePadding: false, label: 'Price' },
 ];
 
-const Orders = ({ orders, handleItemsModalVisibility }) => {
+const Orders = () => {
+  const orders = useSelector(getOrders);
+  const dispatch = useDispatch();
+
   const ordersData = orders.map((order) => ({
     id: order.id,
     email: order.email,
@@ -26,6 +33,11 @@ const Orders = ({ orders, handleItemsModalVisibility }) => {
     price: order.price,
   }));
 
+  const handleItemsClick = (customerId) => {
+    dispatch(setCurrentCustomerId(customerId));
+    dispatch(handleModalVisibility(true));
+  };
+
   return (
     <StyledOrders>
       <Heading headingType="h1">Orders</Heading>
@@ -33,19 +45,10 @@ const Orders = ({ orders, handleItemsModalVisibility }) => {
         headCells={orderCells}
         data={ordersData}
         tableType="orders"
-        onItemsClickFn={handleItemsModalVisibility}
+        onItemsClickFn={handleItemsClick}
       />
     </StyledOrders>
   );
 };
 
-const mapStateToProps = (state) => ({
-  orders: state.ordersReducer.orders,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleItemsModalVisibility: (value) =>
-    dispatch(handleItemsModalVisibility(value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default Orders;

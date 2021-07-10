@@ -2,8 +2,14 @@ import React from 'react';
 import Navbar from '../components/organisms/Navbar';
 import Modal from '../components/utils/MaterialModal';
 import MaterialTable from '../components/organisms/MaterialTable';
-import { handleItemsModalVisibility } from '../redux/actions/';
-import { connect } from 'react-redux';
+import CustomPopover from '../components/utils/CustomPopover';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleModalVisibility, setAnchor } from '../redux/actions/';
+import {
+  getCurrentCustomerId,
+  getOrders,
+  isModalOpen,
+} from '../redux/selectors';
 
 const itemsCells = [
   { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
@@ -13,12 +19,12 @@ const itemsCells = [
   { id: 'image', numeric: true, disablePadding: false, label: 'Image' },
 ];
 
-const NavigationTemplate = ({
-  children,
-  orders,
-  handleItemsModalVisibility,
-  currentCustomerId,
-}) => {
+const NavigationTemplate = ({ children }) => {
+  const orders = useSelector(getOrders);
+  const currentCustomerId = useSelector(getCurrentCustomerId);
+
+  const dispatch = useDispatch();
+
   let itemsData = [];
   let title = '';
 
@@ -38,30 +44,30 @@ const NavigationTemplate = ({
     title = `${currentCustomer.firstName} ${currentCustomer.lastName} ${currentCustomer.createTime}`;
   }
 
+  const handleImageClick = (event) => {
+    dispatch(setAnchor(event.target.getBoundingClientRect()));
+    console.dir(event.target.getBoundingClientRect());
+  };
+
   return (
     <>
-      <Modal isOpen={currentCustomerId} onCloseFn={handleItemsModalVisibility}>
+      <Modal
+        isOpen={useSelector(isModalOpen)}
+        onCloseFn={() => dispatch(handleModalVisibility(false))}
+      >
         <MaterialTable
           headCells={itemsCells}
           data={itemsData}
           tableType="items"
           tableTitle={title}
+          onImageClickFn={handleImageClick}
         />
       </Modal>
+      <CustomPopover />
       <Navbar />
       {children}
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
-  orders: state.ordersReducer.orders,
-  currentCustomerId: state.appReducer.app.currentCustomerId,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleItemsModalVisibility: (value) =>
-    dispatch(handleItemsModalVisibility(value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationTemplate);
+export default NavigationTemplate;

@@ -29,7 +29,7 @@ const TransitionsModal = ({ children, onCloseFn, isOpen }) => {
       aria-describedby="transition-modal-description"
       className={classes.modal}
       open={isOpen}
-      onClose={() => onCloseFn(false)}
+      onClose={onCloseFn}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{

@@ -27,6 +27,7 @@ const MaterialTable = ({
   tableType,
   onItemsClickFn,
   tableTitle,
+  onImageClickFn,
 }) => {
   const rows = data;
 
@@ -329,7 +330,6 @@ const MaterialTable = ({
                         {tableType === 'orders' ? (
                           <>
                             {Object.values(row).map((value, index) => {
-                              console.log(value);
                               if (index === 0) {
                                 return (
                                   <TableCell
@@ -369,7 +369,6 @@ const MaterialTable = ({
                         ) : tableType === 'items' ? (
                           <>
                             {Object.values(row).map((value, index) => {
-                              console.log(value);
                               if (index === 0) {
                                 return (
                                   <TableCell
@@ -385,8 +384,12 @@ const MaterialTable = ({
                               }
                               if (index === Object.values(row).length - 1) {
                                 return (
-                                  <TableCell key={index} align="right">
-                                    <a href={value}>Open image</a>
+                                  <TableCell
+                                    onClick={onImageClickFn}
+                                    key={index}
+                                    align="right"
+                                  >
+                                    Show
                                   </TableCell>
                                 );
                               }

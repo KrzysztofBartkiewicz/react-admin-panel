@@ -1,11 +1,21 @@
 import actionTypes from './actionsTypes';
 
-export const getOrders = (orders) => ({
-  type: actionTypes.GET_ORDERS,
+export const setOrders = (orders) => ({
+  type: actionTypes.SET_ORDERS,
   payload: orders,
 });
 
-export const handleItemsModalVisibility = (value) => ({
-  type: actionTypes.HANDLE_ITEMS_MODAL_VISIBILITY,
+export const setCurrentCustomerId = (value) => ({
+  type: actionTypes.SET_CURRENT_CUSTOMER_ID,
+  payload: value,
+});
+
+export const handleModalVisibility = (value) => ({
+  type: actionTypes.HANDLE_MODAL_VISIBILITY,
+  payload: value,
+});
+
+export const setAnchor = (value) => ({
+  type: actionTypes.SET_ANCHOR,
   payload: value,
 });
