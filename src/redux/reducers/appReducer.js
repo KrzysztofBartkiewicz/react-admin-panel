@@ -5,6 +5,8 @@ const initialState = {
   currentCustomerId: '',
   anchor: null,
   imageAddress: '',
+  selectedOrders: [],
+  selectedItems: [],
   orders: [],
 };
 
@@ -40,6 +42,18 @@ const appReducer = (state = initialState, actions) => {
       return {
         ...state,
         imageAddress: payload,
+      };
+
+    case actionsTypes.SET_SELECTED_ORDERS:
+      return {
+        ...state,
+        selectedOrders: payload,
+      };
+
+    case actionsTypes.SET_SELECTED_ITEMS:
+      return {
+        ...state,
+        selectedItems: payload,
       };
 
     default:

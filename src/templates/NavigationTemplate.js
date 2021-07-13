@@ -8,11 +8,13 @@ import {
   handleModalVisibility,
   setAnchor,
   setImageAddress,
+  setSelectedItems,
 } from '../redux/actions/';
 import {
   getCurrentCustomerId,
   getImageAddress,
   getOrders,
+  getSelectedItems,
   isModalOpen,
 } from '../redux/selectors';
 
@@ -67,6 +69,8 @@ const NavigationTemplate = ({ children }) => {
           tableType="items"
           tableTitle={title}
           onImageClickFn={handleImageClick}
+          selected={useSelector(getSelectedItems)}
+          setSelected={(value) => dispatch(setSelectedItems(value))}
         />
       </Modal>
       <CustomPopover>

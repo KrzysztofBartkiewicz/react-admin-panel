@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -22,6 +23,8 @@ const MaterialTable = ({
   onItemsClickFn,
   tableTitle,
   onImageClickFn,
+  selected,
+  setSelected,
 }) => {
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,7 +60,6 @@ const MaterialTable = ({
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
-    const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -77,12 +79,12 @@ const MaterialTable = ({
       setSelected([]);
     };
 
-    const handleClick = (event, name) => {
-      const selectedIndex = selected.indexOf(name);
+    const handleClick = (event, id) => {
+      const selectedIndex = selected.indexOf(id);
       let newSelected = [];
 
       if (selectedIndex === -1) {
-        newSelected = newSelected.concat(selected, name);
+        newSelected = newSelected.concat(selected, id);
       } else if (selectedIndex === 0) {
         newSelected = newSelected.concat(selected.slice(1));
       } else if (selectedIndex === selected.length - 1) {
@@ -110,7 +112,7 @@ const MaterialTable = ({
       setDense(event.target.checked);
     };
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
+    const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);

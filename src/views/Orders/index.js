@@ -5,9 +5,10 @@ import { StyledOrders } from './StyledOrders';
 import {
   handleModalVisibility,
   setCurrentCustomerId,
+  setSelectedOrders,
 } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from '../../redux/selectors';
+import { getOrders, getSelectedOrders } from '../../redux/selectors';
 
 const orderCells = [
   { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
@@ -46,6 +47,8 @@ const Orders = () => {
         rows={ordersData}
         tableType="orders"
         onItemsClickFn={handleItemsClick}
+        selected={useSelector(getSelectedOrders)}
+        setSelected={(value) => dispatch(setSelectedOrders(value))}
       />
     </StyledOrders>
   );

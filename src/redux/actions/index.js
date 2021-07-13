@@ -1,3 +1,4 @@
+import actionsTypes from './actionsTypes';
 import actionTypes from './actionsTypes';
 
 export const setOrders = (orders) => ({
@@ -22,5 +23,15 @@ export const setAnchor = (value) => ({
 
 export const setImageAddress = (value) => ({
   type: actionTypes.SET_IMAGE_ADDRESS,
+  payload: value,
+});
+
+export const setSelectedOrders = (value) => ({
+  type: actionsTypes.SET_SELECTED_ORDERS,
+  payload: value,
+});
+
+export const setSelectedItems = (value) => ({
+  type: actionsTypes.SET_SELECTED_ITEMS,
   payload: value,
 });
