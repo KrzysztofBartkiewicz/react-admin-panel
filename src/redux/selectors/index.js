@@ -5,3 +5,6 @@ export const isModalOpen = (state) => state.isModalOpen;
 export const getImageAddress = (state) => state.imageAddress;
 export const getSelectedOrders = (state) => state.selectedOrders;
 export const getSelectedItems = (state) => state.selectedItems;
+export const getDeletedOrders = (state) => state.deletedOrders;
+export const getSelectedOrdersToDelete = (state) =>
+  state.selectedOrdersToDelete;

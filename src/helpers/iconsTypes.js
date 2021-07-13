@@ -4,6 +4,7 @@ import { ReactComponent as ChartIcon } from '../assets/icons/pie-chart.svg';
 import { ReactComponent as SettingsIcon } from '../assets/icons/settings-1.svg';
 import { ReactComponent as SettingsAltIcon } from '../assets/icons/settings.svg';
 import { ReactComponent as HouseIcon } from '../assets/icons/house.svg';
+import { ReactComponent as CancelIcon } from '../assets/icons/cancel.svg';
 
 const iconsTypes = {
   FolderIcon,
@@ -12,6 +13,7 @@ const iconsTypes = {
   SettingsAltIcon,
   SettingsIcon,
   HouseIcon,
+  CancelIcon,
 };
 
 export default iconsTypes;

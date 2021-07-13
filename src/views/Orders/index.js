@@ -4,51 +4,53 @@ import OrdersTable from '../../components/organisms/MaterialTable';
 import { StyledOrders } from './StyledOrders';
 import {
   handleModalVisibility,
+  removeSelectedOrders,
   setCurrentCustomerId,
   setSelectedOrders,
 } from '../../redux/actions';
+import { deleteOrders } from '../../firebase/firestoreUtils';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders, getSelectedOrders } from '../../redux/selectors';
-
-const orderCells = [
-  { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
-  { id: 'email', numeric: true, disablePadding: false, label: 'Email' },
-  { id: 'items', numeric: true, disablePadding: false, label: 'Items' },
-  { id: 'firstName', numeric: true, disablePadding: false, label: 'Name' },
-  { id: 'lastName', numeric: true, disablePadding: false, label: 'Surname' },
-  { id: 'status', numeric: true, disablePadding: false, label: 'Status' },
-  { id: 'price', numeric: true, disablePadding: false, label: 'Price' },
-];
+import { ordersCells } from '../../helpers/tableCells';
 
 const Orders = () => {
   const orders = useSelector(getOrders);
+  const ordersToDelete = useSelector(getSelectedOrders);
   const dispatch = useDispatch();
 
-  const ordersData = orders.map((order) => ({
-    id: order.id,
-    email: order.email,
-    items: order.items.length,
-    name: order.firstName,
-    surname: order.lastName,
-    status: order.status,
-    price: order.price,
-  }));
+  const ordersData = orders.map(
+    ({ id, email, items, firstName, lastName, status, price }) => ({
+      id,
+      email,
+      items: items.length,
+      name: firstName,
+      surname: lastName,
+      status,
+      price,
+    })
+  );
 
   const handleItemsClick = (customerId) => {
     dispatch(setCurrentCustomerId(customerId));
     dispatch(handleModalVisibility(true));
   };
 
+  const handleDeleteOrders = () => {
+    deleteOrders(ordersToDelete);
+    dispatch(removeSelectedOrders());
+  };
+
   return (
     <StyledOrders>
       <Heading headingType="h1">Orders</Heading>
       <OrdersTable
-        headCells={orderCells}
+        headCells={ordersCells}
         rows={ordersData}
         tableType="orders"
         onItemsClickFn={handleItemsClick}
         selected={useSelector(getSelectedOrders)}
         setSelected={(value) => dispatch(setSelectedOrders(value))}
+        onDeleteFn={handleDeleteOrders}
       />
     </StyledOrders>
   );

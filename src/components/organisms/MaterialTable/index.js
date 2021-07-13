@@ -1,5 +1,4 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -25,6 +24,9 @@ const MaterialTable = ({
   onImageClickFn,
   selected,
   setSelected,
+  onDeleteFn,
+  actionBtn,
+  onRestoreFn,
 }) => {
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -58,11 +60,11 @@ const MaterialTable = ({
 
   const EnhancedTable = () => {
     const classes = useStyles();
-    const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('calories');
-    const [page, setPage] = React.useState(0);
-    const [dense, setDense] = React.useState(false);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('calories');
+    const [page, setPage] = useState(0);
+    const [dense, setDense] = useState(false);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const handleRequestSort = (event, property) => {
       const isAsc = orderBy === property && order === 'asc';
@@ -72,7 +74,7 @@ const MaterialTable = ({
 
     const handleSelectAllClick = (event) => {
       if (event.target.checked) {
-        const newSelecteds = rows.map((n) => n.id);
+        const newSelecteds = rows.map((row) => row.id);
         setSelected(newSelecteds);
         return;
       }
@@ -121,9 +123,12 @@ const MaterialTable = ({
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <EnhancedTableToolbar
-            tableTitle={tableType}
+            tableType={tableType}
             tableTitle={tableTitle}
             numSelected={selected.length}
+            onDeleteFn={onDeleteFn}
+            actionBtn={actionBtn}
+            onRestoreFn={onRestoreFn}
           />
           <TableContainer>
             <Table

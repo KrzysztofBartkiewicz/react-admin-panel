@@ -4,6 +4,7 @@ import Modal from '../components/utils/MaterialModal';
 import ItemsTable from '../components/organisms/MaterialTable';
 import CustomPopover from '../components/utils/CustomPopover';
 import { useDispatch, useSelector } from 'react-redux';
+import { itemsCells } from '../helpers/tableCells';
 import {
   handleModalVisibility,
   setAnchor,
@@ -17,14 +18,6 @@ import {
   getSelectedItems,
   isModalOpen,
 } from '../redux/selectors';
-
-const itemsCells = [
-  { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
-  { id: 'name', numeric: true, disablePadding: false, label: 'Name' },
-  { id: 'category', numeric: true, disablePadding: false, label: 'Category' },
-  { id: 'price', numeric: true, disablePadding: false, label: 'Price' },
-  { id: 'image', numeric: true, disablePadding: false, label: 'Image' },
-];
 
 const NavigationTemplate = ({ children }) => {
   const orders = useSelector(getOrders);

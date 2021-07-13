@@ -2,7 +2,7 @@ const routes = {
   home: '/',
   orders: '/orders',
   charts: '/charts',
-  filter: '/filter',
+  deleted: '/deleted',
   settings: '/settings',
 };
 

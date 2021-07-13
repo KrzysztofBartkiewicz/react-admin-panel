@@ -1,4 +1,5 @@
 import DeleteIcon from '@material-ui/icons/Delete';
+import RestoreIcon from '@material-ui/icons/Restore';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -27,7 +28,14 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedTableToolbar = ({ numSelected, tableType, tableTitle }) => {
+const EnhancedTableToolbar = ({
+  numSelected,
+  tableType,
+  tableTitle,
+  onDeleteFn,
+  actionBtn,
+  onRestoreFn,
+}) => {
   const classes = useToolbarStyles();
 
   return (
@@ -57,11 +65,19 @@ const EnhancedTableToolbar = ({ numSelected, tableType, tableTitle }) => {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        actionBtn === 'restore' ? (
+          <Tooltip title="Restore">
+            <IconButton aria-label="restore" onClick={onRestoreFn}>
+              <RestoreIcon />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Delete">
+            <IconButton aria-label="delete" onClick={onDeleteFn}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        )
       ) : (
         <Tooltip title="Filter list">
           <IconButton aria-label="filter list">

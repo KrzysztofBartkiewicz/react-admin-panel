@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import GlobalStylesTemplate from '../templates/GlobalStylesTemplate';
 import Router from '../router';
-import { allOrdersCollection } from '../firebase/firestoreUtils';
+import {
+  allOrdersCollection,
+  deletedOrdersCollection,
+} from '../firebase/firestoreUtils';
 import { useDispatch } from 'react-redux';
-import { setOrders } from '../redux/actions';
+import { setDeletedOrders, setOrders } from '../redux/actions';
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const subscribe = allOrdersCollection.onSnapshot((snapshot) => {
+    const subscribeAllOrders = allOrdersCollection.onSnapshot((snapshot) => {
       const dataFromOrdersCollections = snapshot.docs.map((doc) => {
         return {
           orderId: doc.id,
@@ -18,6 +21,19 @@ const App = () => {
       });
       dispatch(setOrders(dataFromOrdersCollections));
     });
+
+    const subscribeDeletedOrders = deletedOrdersCollection.onSnapshot(
+      (snapshot) => {
+        const dataFromDeletedOrdersCollection = snapshot.docs.map((doc) => {
+          return {
+            orderId: doc.id,
+            ...doc.data(),
+          };
+        });
+        dispatch(setDeletedOrders(dataFromDeletedOrdersCollection));
+      }
+    );
+    // return subscribeDeletedOrders
   }, []);
 
   return (

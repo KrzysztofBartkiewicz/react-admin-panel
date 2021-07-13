@@ -6,9 +6,14 @@ export const setOrders = (orders) => ({
   payload: orders,
 });
 
-export const setCurrentCustomerId = (value) => ({
+export const setDeletedOrders = (orders) => ({
+  type: actionsTypes.SET_DELETED_ORDERS,
+  payload: orders,
+});
+
+export const setCurrentCustomerId = (id) => ({
   type: actionTypes.SET_CURRENT_CUSTOMER_ID,
-  payload: value,
+  payload: id,
 });
 
 export const handleModalVisibility = (value) => ({
@@ -16,22 +21,39 @@ export const handleModalVisibility = (value) => ({
   payload: value,
 });
 
-export const setAnchor = (value) => ({
+export const setAnchor = (anchor) => ({
   type: actionTypes.SET_ANCHOR,
-  payload: value,
+  payload: anchor,
 });
 
-export const setImageAddress = (value) => ({
+export const setImageAddress = (imgAddress) => ({
   type: actionTypes.SET_IMAGE_ADDRESS,
-  payload: value,
+  payload: imgAddress,
 });
 
-export const setSelectedOrders = (value) => ({
+export const setSelectedOrders = (ordersIdsArr) => ({
   type: actionsTypes.SET_SELECTED_ORDERS,
-  payload: value,
+  payload: ordersIdsArr,
 });
 
-export const setSelectedItems = (value) => ({
+export const setSelectedItems = (itemsIdsArr) => ({
   type: actionsTypes.SET_SELECTED_ITEMS,
-  payload: value,
+  payload: itemsIdsArr,
+});
+
+export const removeSelectedOrders = () => ({
+  type: actionsTypes.REMOVE_SELECTED_ORDERS,
+});
+
+export const removeSelectedItems = () => ({
+  type: actionsTypes.REMOVE_SELECTED_ITEMS,
+});
+
+export const setSelectedOrdersToDelete = (itemsIdsArr) => ({
+  type: actionTypes.SET_SLECTED_ORDERS_TO_DELETE,
+  payload: itemsIdsArr,
+});
+
+export const removeSelectedOrdersToDelete = () => ({
+  type: actionTypes.REMOVE_SELECTED_ORDERS_TO_DELETE,
 });

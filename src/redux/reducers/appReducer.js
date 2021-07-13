@@ -6,8 +6,10 @@ const initialState = {
   anchor: null,
   imageAddress: '',
   selectedOrders: [],
+  selectedOrdersToDelete: [],
   selectedItems: [],
   orders: [],
+  deletedOrders: [],
 };
 
 const appReducer = (state = initialState, actions) => {
@@ -18,6 +20,12 @@ const appReducer = (state = initialState, actions) => {
       return {
         ...state,
         orders: payload,
+      };
+
+    case actionsTypes.SET_DELETED_ORDERS:
+      return {
+        ...state,
+        deletedOrders: payload,
       };
 
     case actionsTypes.SET_CURRENT_CUSTOMER_ID:
@@ -54,6 +62,30 @@ const appReducer = (state = initialState, actions) => {
       return {
         ...state,
         selectedItems: payload,
+      };
+
+    case actionsTypes.SET_SLECTED_ORDERS_TO_DELETE:
+      return {
+        ...state,
+        selectedOrdersToDelete: payload,
+      };
+
+    case actionsTypes.REMOVE_SELECTED_ORDERS:
+      return {
+        ...state,
+        selectedOrders: [],
+      };
+
+    case actionsTypes.REMOVE_SELECTED_ITEMS:
+      return {
+        ...state,
+        selectedItems: [],
+      };
+
+    case actionsTypes.REMOVE_SELECTED_ORDERS_TO_DELETE:
+      return {
+        ...state,
+        selectedOrdersToDelete: [],
       };
 
     default:

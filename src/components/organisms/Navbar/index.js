@@ -37,8 +37,8 @@ const Navbar = () => {
         </StyledNavItem>
 
         <StyledNavItem>
-          <NavigationLink to={routes.filter} icon={iconsTypes.SettingsIcon}>
-            Filter
+          <NavigationLink to={routes.deleted} icon={iconsTypes.CancelIcon}>
+            Recycle Bin
           </NavigationLink>
         </StyledNavItem>
 
