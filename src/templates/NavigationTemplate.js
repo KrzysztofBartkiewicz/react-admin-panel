@@ -1,12 +1,17 @@
 import React from 'react';
 import Navbar from '../components/organisms/Navbar';
 import Modal from '../components/utils/MaterialModal';
-import MaterialTable from '../components/organisms/MaterialTable';
+import ItemsTable from '../components/organisms/MaterialTable';
 import CustomPopover from '../components/utils/CustomPopover';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleModalVisibility, setAnchor } from '../redux/actions/';
+import {
+  handleModalVisibility,
+  setAnchor,
+  setImageAddress,
+} from '../redux/actions/';
 import {
   getCurrentCustomerId,
+  getImageAddress,
   getOrders,
   isModalOpen,
 } from '../redux/selectors';
@@ -44,9 +49,10 @@ const NavigationTemplate = ({ children }) => {
     title = `${currentCustomer.firstName} ${currentCustomer.lastName} ${currentCustomer.createTime}`;
   }
 
-  const handleImageClick = (event) => {
+  const handleImageClick = (event, imageAddress) => {
+    event.stopPropagation();
+    dispatch(setImageAddress(imageAddress));
     dispatch(setAnchor(event.target.getBoundingClientRect()));
-    console.dir(event.target.getBoundingClientRect());
   };
 
   return (
@@ -55,15 +61,20 @@ const NavigationTemplate = ({ children }) => {
         isOpen={useSelector(isModalOpen)}
         onCloseFn={() => dispatch(handleModalVisibility(false))}
       >
-        <MaterialTable
+        <ItemsTable
           headCells={itemsCells}
-          data={itemsData}
+          rows={itemsData}
           tableType="items"
           tableTitle={title}
           onImageClickFn={handleImageClick}
         />
       </Modal>
-      <CustomPopover />
+      <CustomPopover>
+        <img
+          style={{ width: '18rem', height: 'auto', display: 'block' }}
+          src={useSelector(getImageAddress)}
+        />
+      </CustomPopover>
       <Navbar />
       {children}
     </>

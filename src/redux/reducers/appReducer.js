@@ -2,8 +2,9 @@ import actionsTypes from '../actions/actionsTypes';
 
 const initialState = {
   isModalOpen: false,
-  currentCustomerId: false,
+  currentCustomerId: '',
   anchor: null,
+  imageAddress: '',
   orders: [],
 };
 
@@ -33,6 +34,12 @@ const appReducer = (state = initialState, actions) => {
       return {
         ...state,
         anchor: payload,
+      };
+
+    case actionsTypes.SET_IMAGE_ADDRESS:
+      return {
+        ...state,
+        imageAddress: payload,
       };
 
     default:

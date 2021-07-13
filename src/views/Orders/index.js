@@ -1,6 +1,6 @@
 import React from 'react';
 import Heading from '../../components/atoms/Heading';
-import MaterialTable from '../../components/organisms/MaterialTable';
+import OrdersTable from '../../components/organisms/MaterialTable';
 import { StyledOrders } from './StyledOrders';
 import {
   handleModalVisibility,
@@ -41,9 +41,9 @@ const Orders = () => {
   return (
     <StyledOrders>
       <Heading headingType="h1">Orders</Heading>
-      <MaterialTable
+      <OrdersTable
         headCells={orderCells}
-        data={ordersData}
+        rows={ordersData}
         tableType="orders"
         onItemsClickFn={handleItemsClick}
       />

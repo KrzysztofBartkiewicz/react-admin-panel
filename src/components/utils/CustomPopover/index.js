@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAnchor } from '../../../redux/selectors';
-import { setAnchor } from '../../../redux/actions';
+import { setAnchor, setImageAddress } from '../../../redux/actions';
 import { StyledBackdrop, StyledPopover } from './StyledPopover';
 
 const CustomPopover = ({ children }) => {
@@ -10,9 +10,19 @@ const CustomPopover = ({ children }) => {
 
   const open = Boolean(anchor);
 
+  const handleBackdropClick = () => {
+    dispatch(setAnchor(null));
+    dispatch(setImageAddress(''));
+  };
+
   return (
-    <StyledBackdrop onClick={dispatch(setAnchor(null))} isOpen={open}>
-      <StyledPopover anchor={anchor}>{children}</StyledPopover>
+    <StyledBackdrop onClick={handleBackdropClick} isOpen={open}>
+      <StyledPopover
+        onClick={(event) => event.stopPropagation()}
+        anchor={anchor}
+      >
+        {children}
+      </StyledPopover>
     </StyledBackdrop>
   );
 };

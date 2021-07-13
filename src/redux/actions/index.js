@@ -19,3 +19,8 @@ export const setAnchor = (value) => ({
   type: actionTypes.SET_ANCHOR,
   payload: value,
 });
+
+export const setImageAddress = (value) => ({
+  type: actionTypes.SET_IMAGE_ADDRESS,
+  payload: value,
+});
