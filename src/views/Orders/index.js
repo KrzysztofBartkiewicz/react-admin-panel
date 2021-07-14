@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import Heading from '../../components/atoms/Heading';
 import OrdersTable from '../../components/organisms/MaterialTable';
 import { StyledOrders } from './StyledOrders';
@@ -17,8 +18,9 @@ const Orders = () => {
   const dispatch = useDispatch();
 
   const ordersData = orders.map(
-    ({ id, email, items, firstName, lastName, status, price }) => ({
+    ({ id, createTime, email, items, firstName, lastName, status, price }) => ({
       id,
+      date: moment(createTime).format('DD-MM-YYYY'),
       email,
       items: items.length,
       name: firstName,

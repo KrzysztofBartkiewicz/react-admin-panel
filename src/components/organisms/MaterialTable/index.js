@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,18 +8,17 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import EnhancedTableToolbar from './Toolbar';
 import EnhancedTableHead from './Head';
 import { stableSort, getComparator } from './utils';
+import { useStyles } from './styles';
 
 const MaterialTable = ({
   rows,
   headCells,
   tableType,
-  onItemsClickFn,
   tableTitle,
   onImageClickFn,
   selected,
@@ -28,36 +27,6 @@ const MaterialTable = ({
   actionBtn,
   onRestoreFn,
 }) => {
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-    },
-    paper: {
-      width: '100%',
-      marginBottom: theme.spacing(2),
-    },
-    table: {
-      minWidth: 750,
-    },
-    visuallyHidden: {
-      border: 0,
-      clip: 'rect(0 0 0 0)',
-      height: 1,
-      margin: -1,
-      overflow: 'hidden',
-      padding: 0,
-      position: 'absolute',
-      top: 20,
-      width: 1,
-    },
-    itemsCell: {
-      cursor: 'pointer',
-      '&:hover': {
-        fontWeight: 500,
-      },
-    },
-  }));
-
   const EnhancedTable = () => {
     const classes = useStyles();
     const [order, setOrder] = useState('asc');
@@ -187,23 +156,7 @@ const MaterialTable = ({
                                   </TableCell>
                                 );
                               }
-                              return index === 2 ? (
-                                <Tooltip
-                                  key={index}
-                                  title="Click to show items"
-                                >
-                                  <TableCell
-                                    className={classes.itemsCell}
-                                    align="right"
-                                    onClick={(event) => {
-                                      event.stopPropagation();
-                                      onItemsClickFn(row.id);
-                                    }}
-                                  >
-                                    {value}
-                                  </TableCell>
-                                </Tooltip>
-                              ) : (
+                              return (
                                 <TableCell key={index} align="right">
                                   {value}
                                 </TableCell>
