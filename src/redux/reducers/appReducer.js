@@ -2,6 +2,7 @@ import actionsTypes from '../actions/actionsTypes';
 
 const initialState = {
   isModalOpen: false,
+  isDialogOpen: false,
   currentCustomerId: '',
   anchor: null,
   imageAddress: '',
@@ -38,6 +39,12 @@ const appReducer = (state = initialState, actions) => {
       return {
         ...state,
         isModalOpen: payload,
+      };
+
+    case actionsTypes.HANDLE_DIALOG_VISIBILITY:
+      return {
+        ...state,
+        isDialogOpen: payload,
       };
 
     case actionsTypes.SET_ANCHOR:

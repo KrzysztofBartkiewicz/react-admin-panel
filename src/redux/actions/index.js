@@ -16,6 +16,11 @@ export const setCurrentCustomerId = (id) => ({
   payload: id,
 });
 
+export const handleDialogVisibility = (value) => ({
+  type: actionTypes.HANDLE_DIALOG_VISIBILITY,
+  payload: value,
+});
+
 export const handleModalVisibility = (value) => ({
   type: actionTypes.HANDLE_MODAL_VISIBILITY,
   payload: value,

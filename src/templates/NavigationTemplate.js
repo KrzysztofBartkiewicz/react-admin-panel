@@ -3,25 +3,33 @@ import Navbar from '../components/organisms/Navbar';
 import Modal from '../components/utils/MaterialModal';
 import ItemsTable from '../components/organisms/MaterialTable';
 import CustomPopover from '../components/utils/CustomPopover';
+import AlertDialog from '../components/utils/MaterialDialog';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsCells } from '../helpers/tableCells';
+import { deleteOrders } from '../firebase/firestoreUtils';
 import {
   handleModalVisibility,
   setAnchor,
+  setCurrentCustomerId,
   setImageAddress,
   setSelectedItems,
+  handleDialogVisibility,
+  removeSelectedOrders,
 } from '../redux/actions/';
 import {
   getCurrentCustomerId,
   getImageAddress,
   getOrders,
   getSelectedItems,
+  getSelectedOrders,
+  isDialogOpen,
   isModalOpen,
 } from '../redux/selectors';
 
 const NavigationTemplate = ({ children }) => {
   const orders = useSelector(getOrders);
   const currentCustomerId = useSelector(getCurrentCustomerId);
+  const ordersToDelete = useSelector(getSelectedOrders);
 
   const dispatch = useDispatch();
 
@@ -50,12 +58,20 @@ const NavigationTemplate = ({ children }) => {
     dispatch(setAnchor(event.target.getBoundingClientRect()));
   };
 
+  const handleCloseModal = () => {
+    dispatch(handleModalVisibility(false));
+    dispatch(setCurrentCustomerId(''));
+  };
+
+  const handleDeleteOrders = () => {
+    deleteOrders(ordersToDelete);
+    dispatch(handleDialogVisibility(false));
+    dispatch(removeSelectedOrders());
+  };
+
   return (
     <>
-      <Modal
-        isOpen={useSelector(isModalOpen)}
-        onCloseFn={() => dispatch(handleModalVisibility(false))}
-      >
+      <Modal isOpen={useSelector(isModalOpen)} onCloseFn={handleCloseModal}>
         <ItemsTable
           headCells={itemsCells}
           rows={itemsData}
@@ -72,6 +88,13 @@ const NavigationTemplate = ({ children }) => {
           src={useSelector(getImageAddress)}
         />
       </CustomPopover>
+      <AlertDialog
+        isOpen={useSelector(isDialogOpen)}
+        onCloseFn={() => dispatch(handleDialogVisibility(false))}
+        onAgreeFn={handleDeleteOrders}
+        title="Move to recycle bin"
+        description="Are you sure you want to continue?"
+      />
       <Navbar />
       {children}
     </>
