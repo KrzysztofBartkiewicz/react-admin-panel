@@ -10,26 +10,30 @@ import { deleteOrders } from '../firebase/firestoreUtils';
 import {
   handleModalVisibility,
   setAnchor,
-  setCurrentCustomerId,
+  setCurrentOrderId,
   setImageAddress,
   setSelectedItems,
   handleDialogVisibility,
   removeSelectedOrders,
+  setIsOrderEdited,
 } from '../redux/actions/';
 import {
-  getCurrentCustomerId,
+  getCurrentOrderId,
   getImageAddress,
   getOrders,
   getSelectedItems,
   getSelectedOrders,
   isDialogOpen,
   isModalOpen,
+  isOrderEdited,
 } from '../redux/selectors';
+import EditBox from '../components/molecules/EditBox';
 
 const NavigationTemplate = ({ children }) => {
   const orders = useSelector(getOrders);
-  const currentCustomerId = useSelector(getCurrentCustomerId);
+  const currentCustomerId = useSelector(getCurrentOrderId);
   const ordersToDelete = useSelector(getSelectedOrders);
+  const imageAddress = useSelector(getImageAddress);
 
   const dispatch = useDispatch();
 
@@ -60,7 +64,8 @@ const NavigationTemplate = ({ children }) => {
 
   const handleCloseModal = () => {
     dispatch(handleModalVisibility(false));
-    dispatch(setCurrentCustomerId(''));
+    dispatch(setCurrentOrderId(''));
+    dispatch(setIsOrderEdited(false));
   };
 
   const handleDeleteOrders = () => {
@@ -82,10 +87,13 @@ const NavigationTemplate = ({ children }) => {
           setSelected={(value) => dispatch(setSelectedItems(value))}
         />
       </Modal>
+      <Modal isOpen={useSelector(isOrderEdited)} onCloseFn={handleCloseModal}>
+        <EditBox />
+      </Modal>
       <CustomPopover>
         <img
           style={{ width: '18rem', height: 'auto', display: 'block' }}
-          src={useSelector(getImageAddress)}
+          src={imageAddress}
         />
       </CustomPopover>
       <AlertDialog

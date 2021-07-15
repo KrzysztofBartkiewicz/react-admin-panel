@@ -21,9 +21,20 @@ const DeletedOrders = () => {
   const ordersToRestore = useSelector(getSelectedOrdersToDelete);
 
   const ordersData = orders.map(
-    ({ id, createTime, email, items, firstName, lastName, status, price }) => ({
+    ({
+      id,
+      createTime,
+      deliveryDate,
+      email,
+      items,
+      firstName,
+      lastName,
+      status,
+      price,
+    }) => ({
       id,
       date: moment(createTime).format('DD-MM-YYYY'),
+      deliveryDate: moment(deliveryDate).format('DD-MM-YYYY'),
       email,
       items: items.length,
       name: firstName,
@@ -44,7 +55,7 @@ const DeletedOrders = () => {
       <OrdersTable
         headCells={ordersCells}
         rows={ordersData}
-        tableType="orders"
+        tableType="deleted"
         selected={useSelector(getSelectedOrdersToDelete)}
         setSelected={(value) => dispatch(setSelectedOrdersToDelete(value))}
         actionBtn="restore"

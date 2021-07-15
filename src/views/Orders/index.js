@@ -6,7 +6,8 @@ import { StyledOrders } from './StyledOrders';
 import {
   handleDialogVisibility,
   handleModalVisibility,
-  setCurrentCustomerId,
+  setCurrentOrderId,
+  setIsOrderEdited,
   setSelectedOrders,
 } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,9 +19,20 @@ const Orders = () => {
   const dispatch = useDispatch();
 
   const ordersData = orders.map(
-    ({ id, createTime, email, items, firstName, lastName, status, price }) => ({
+    ({
+      id,
+      createTime,
+      deliveryDate,
+      email,
+      items,
+      firstName,
+      lastName,
+      status,
+      price,
+    }) => ({
       id,
       date: moment(createTime).format('DD-MM-YYYY'),
+      deliveryDate: moment(deliveryDate).format('DD-MM-YYYY'),
       email,
       items: items.length,
       name: firstName,
@@ -30,13 +42,20 @@ const Orders = () => {
     })
   );
 
-  const handleItemsClick = (customerId) => {
-    dispatch(setCurrentCustomerId(customerId));
+  const handleItemsClick = (event, orderId) => {
+    event.stopPropagation();
+    dispatch(setCurrentOrderId(orderId));
     dispatch(handleModalVisibility(true));
   };
 
   const handleDeleteOrders = () => {
     dispatch(handleDialogVisibility(true));
+  };
+
+  const handleEditOrder = (event, orderId) => {
+    event.stopPropagation();
+    dispatch(setCurrentOrderId(orderId));
+    dispatch(setIsOrderEdited(true));
   };
 
   return (
@@ -46,10 +65,11 @@ const Orders = () => {
         headCells={ordersCells}
         rows={ordersData}
         tableType="orders"
-        onItemsClickFn={handleItemsClick}
+        onShowItemsFn={handleItemsClick}
         selected={useSelector(getSelectedOrders)}
         setSelected={(value) => dispatch(setSelectedOrders(value))}
         onDeleteFn={handleDeleteOrders}
+        onEditFn={handleEditOrder}
       />
     </StyledOrders>
   );

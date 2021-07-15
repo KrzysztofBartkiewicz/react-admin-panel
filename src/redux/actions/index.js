@@ -6,13 +6,18 @@ export const setOrders = (orders) => ({
   payload: orders,
 });
 
+export const setIsOrderEdited = (value) => ({
+  type: actionTypes.SET_IS_ORDER_EDITED,
+  payload: value,
+});
+
 export const setDeletedOrders = (orders) => ({
   type: actionsTypes.SET_DELETED_ORDERS,
   payload: orders,
 });
 
-export const setCurrentCustomerId = (id) => ({
-  type: actionTypes.SET_CURRENT_CUSTOMER_ID,
+export const setCurrentOrderId = (id) => ({
+  type: actionTypes.SET_CURRENT_ORDER_ID,
   payload: id,
 });
 

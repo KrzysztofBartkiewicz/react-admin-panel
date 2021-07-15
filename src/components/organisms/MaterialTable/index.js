@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,6 +13,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import EnhancedTableToolbar from './Toolbar';
 import EnhancedTableHead from './Head';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import { stableSort, getComparator } from './utils';
 import { useStyles } from './styles';
 
@@ -26,13 +29,15 @@ const MaterialTable = ({
   onDeleteFn,
   actionBtn,
   onRestoreFn,
+  onShowItemsFn,
+  onEditFn,
 }) => {
   const EnhancedTable = () => {
     const classes = useStyles();
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
     const [page, setPage] = useState(0);
-    const [dense, setDense] = useState(false);
+    const [dense, setDense] = useState(true);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const handleRequestSort = (event, property) => {
@@ -79,9 +84,9 @@ const MaterialTable = ({
       setPage(0);
     };
 
-    const handleChangeDense = (event) => {
-      setDense(event.target.checked);
-    };
+    // const handleChangeDense = (event) => {
+    //   setDense(event.target.checked);
+    // };
 
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
@@ -145,13 +150,29 @@ const MaterialTable = ({
                             {Object.values(row).map((value, index) => {
                               if (index === 0) {
                                 return (
-                                  <TableCell
-                                    key={index}
-                                    component="th"
-                                    id={labelId}
-                                    scope="row"
-                                    padding="none"
-                                  >
+                                  <Tooltip key={index} title={value}>
+                                    <TableCell
+                                      component="th"
+                                      id={labelId}
+                                      scope="row"
+                                      padding="none"
+                                    >
+                                      ...
+                                    </TableCell>
+                                  </Tooltip>
+                                );
+                              }
+                              if (index === 4) {
+                                return (
+                                  <TableCell key={index} align="right">
+                                    <IconButton
+                                      aria-label="show-items"
+                                      onClick={(event) =>
+                                        onShowItemsFn(event, row.id)
+                                      }
+                                    >
+                                      <VisibilityIcon />
+                                    </IconButton>
                                     {value}
                                   </TableCell>
                                 );
@@ -162,21 +183,30 @@ const MaterialTable = ({
                                 </TableCell>
                               );
                             })}
+                            <TableCell>
+                              <IconButton
+                                aria-label="edit-order"
+                                onClick={(event) => onEditFn(event, row.id)}
+                              >
+                                <EditIcon />
+                              </IconButton>
+                            </TableCell>
                           </>
                         ) : tableType === 'items' ? (
                           <>
                             {Object.values(row).map((value, index) => {
                               if (index === 0) {
                                 return (
-                                  <TableCell
-                                    key={index}
-                                    component="th"
-                                    id={labelId}
-                                    scope="row"
-                                    padding="none"
-                                  >
-                                    {value}
-                                  </TableCell>
+                                  <Tooltip key={index} title={value}>
+                                    <TableCell
+                                      component="th"
+                                      id={labelId}
+                                      scope="row"
+                                      padding="none"
+                                    >
+                                      ...
+                                    </TableCell>
+                                  </Tooltip>
                                 );
                               }
                               if (index === Object.values(row).length - 1) {
@@ -191,6 +221,30 @@ const MaterialTable = ({
                                   >
                                     Show
                                   </TableCell>
+                                );
+                              }
+                              return (
+                                <TableCell key={index} align="right">
+                                  {value}
+                                </TableCell>
+                              );
+                            })}
+                          </>
+                        ) : tableType === 'deleted' ? (
+                          <>
+                            {Object.values(row).map((value, index) => {
+                              if (index === 0) {
+                                return (
+                                  <Tooltip key={index} title={value}>
+                                    <TableCell
+                                      component="th"
+                                      id={labelId}
+                                      scope="row"
+                                      padding="none"
+                                    >
+                                      ...
+                                    </TableCell>
+                                  </Tooltip>
                                 );
                               }
                               return (
@@ -222,10 +276,10 @@ const MaterialTable = ({
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-        <FormControlLabel
+        {/* <FormControlLabel
           control={<Switch checked={dense} onChange={handleChangeDense} />}
           label="Dense padding"
-        />
+        /> */}
       </div>
     );
   };

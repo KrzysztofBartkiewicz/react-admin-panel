@@ -1,6 +1,12 @@
 export const ordersCells = [
   { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
-  { id: 'date', numeric: true, disablePadding: false, label: 'Date' },
+  { id: 'date', numeric: true, disablePadding: false, label: 'Order date' },
+  {
+    id: 'deliveryDate',
+    numeric: true,
+    disablePadding: false,
+    label: 'Delivery date',
+  },
   { id: 'email', numeric: true, disablePadding: false, label: 'Email' },
   { id: 'items', numeric: true, disablePadding: false, label: 'Items' },
   { id: 'firstName', numeric: true, disablePadding: false, label: 'Name' },

@@ -3,7 +3,8 @@ import actionsTypes from '../actions/actionsTypes';
 const initialState = {
   isModalOpen: false,
   isDialogOpen: false,
-  currentCustomerId: '',
+  currentOrderId: '',
+  isOrderEdited: false,
   anchor: null,
   imageAddress: '',
   selectedOrders: [],
@@ -23,16 +24,22 @@ const appReducer = (state = initialState, actions) => {
         orders: payload,
       };
 
+    case actionsTypes.SET_IS_ORDER_EDITED:
+      return {
+        ...state,
+        isOrderEdited: payload,
+      };
+
     case actionsTypes.SET_DELETED_ORDERS:
       return {
         ...state,
         deletedOrders: payload,
       };
 
-    case actionsTypes.SET_CURRENT_CUSTOMER_ID:
+    case actionsTypes.SET_CURRENT_ORDER_ID:
       return {
         ...state,
-        currentCustomerId: payload,
+        currentOrderId: payload,
       };
 
     case actionsTypes.HANDLE_MODAL_VISIBILITY:

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { firestore } from './firebaseConfig';
 
 export const allOrdersCollection = firestore.collection('allOrders');
@@ -34,5 +35,14 @@ export const restoreOrders = (ordersArr) => {
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
+  });
+};
+
+export const updateOrder = (orderId, price, date, status) => {
+  const deliveryDate = moment(date).format('DD-MM-YYYY');
+  allOrdersCollection.doc(orderId).update({
+    price,
+    deliveryDate,
+    status,
   });
 };
