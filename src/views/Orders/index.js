@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import Heading from '../../components/atoms/Heading';
 import OrdersTable from '../../components/organisms/MaterialTable';
 import { StyledOrders } from './StyledOrders';
@@ -29,17 +28,19 @@ const Orders = () => {
       lastName,
       status,
       price,
-    }) => ({
-      id,
-      date: moment(createTime).format('DD-MM-YYYY'),
-      deliveryDate: moment(deliveryDate).format('DD-MM-YYYY'),
-      email,
-      items: items.length,
-      name: firstName,
-      surname: lastName,
-      status,
-      price,
-    })
+    }) => {
+      return {
+        id,
+        date: createTime,
+        deliveryDate,
+        email,
+        items: items.length,
+        name: firstName,
+        surname: lastName,
+        status,
+        price,
+      };
+    }
   );
 
   const handleItemsClick = (event, orderId) => {

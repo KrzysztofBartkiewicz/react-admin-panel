@@ -38,8 +38,7 @@ export const restoreOrders = (ordersArr) => {
   });
 };
 
-export const updateOrder = (orderId, price, date, status) => {
-  const deliveryDate = moment(date).format('DD-MM-YYYY');
+export const updateOrder = (orderId, price, deliveryDate, status) => {
   allOrdersCollection.doc(orderId).update({
     price,
     deliveryDate,

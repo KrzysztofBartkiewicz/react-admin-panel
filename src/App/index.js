@@ -33,7 +33,6 @@ const App = () => {
         dispatch(setDeletedOrders(dataFromDeletedOrdersCollection));
       }
     );
-    // return subscribeDeletedOrders
   }, []);
 
   return (
