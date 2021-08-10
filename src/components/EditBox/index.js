@@ -11,12 +11,12 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import AlertDialog from '../../utils/MaterialDialog';
+import AlertDialog from '../utils/MaterialDialog';
 import { StyledEditBox, useStyles } from './StyledEditBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsOrderEdited } from '../../../redux/actions';
-import { getCurrentOrderId, getOrders } from '../../../redux/selectors';
-import { updateOrder } from '../../../firebase/firestoreUtils';
+import { setIsOrderEdited } from '../../redux/actions';
+import { getCurrentOrderId, getOrders } from '../../redux/selectors';
+import { updateOrder } from '../../firebase/firestoreUtils';
 import moment from 'moment';
 
 const EditBox = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import Heading from '../../components/atoms/Heading';
-import OrdersTable from '../../components/organisms/MaterialTable';
+import Heading from '../../components/Heading';
+import OrdersTable from '../../components/tables/MaterialTable';
 import { StyledDeleted } from './StyledFilter';
 import { ordersCells } from '../../helpers/tableCells';
 import { useSelector, useDispatch } from 'react-redux';

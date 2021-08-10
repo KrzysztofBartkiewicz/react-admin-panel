@@ -1,7 +1,8 @@
 import React from 'react';
-import Navbar from '../components/organisms/Navbar';
+import Navbar from '../components/Navbar';
+import EditBox from '../components/EditBox';
 import Modal from '../components/utils/MaterialModal';
-import ItemsTable from '../components/organisms/MaterialTable';
+import ItemsTable from '../components/tables/MaterialTable';
 import CustomPopover from '../components/utils/CustomPopover';
 import AlertDialog from '../components/utils/MaterialDialog';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +28,6 @@ import {
   isModalOpen,
   isOrderEdited,
 } from '../redux/selectors';
-import EditBox from '../components/molecules/EditBox';
 
 const NavigationTemplate = ({ children }) => {
   const orders = useSelector(getOrders);

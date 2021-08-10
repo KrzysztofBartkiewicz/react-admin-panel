@@ -1,5 +1,5 @@
 import React from 'react';
-import Heading from '../../components/atoms/Heading';
+import Heading from '../../components/Heading';
 import { StyledCharts } from './StyledCharts';
 
 const Charts = () => {

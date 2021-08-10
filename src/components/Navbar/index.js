@@ -1,8 +1,8 @@
 import React from 'react';
-import Logo from '../../atoms/Logo';
-import NavigationLink from '../../atoms/NavigationLink';
-import iconsTypes from '../../../helpers/iconsTypes';
-import routes from '../../../router/routes';
+import Logo from '../Logo';
+import NavigationLink from '../NavigationLink';
+import iconsTypes from '../../helpers/iconsTypes';
+import routes from '../../router/routes';
 import {
   StyledNavbar,
   StyledUserWrapper,
