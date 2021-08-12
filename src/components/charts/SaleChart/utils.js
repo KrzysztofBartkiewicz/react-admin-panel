@@ -18,8 +18,8 @@ export const getLastYearData = (orders) => {
     }, 0);
 
     const bar = {
-      name: moment(month).format('MMM'),
-      profit: sum,
+      x: moment(month).format('MMM'),
+      y: sum,
     };
 
     data.push(bar);
@@ -47,8 +47,8 @@ export const getLastMonthData = (orders) => {
     }, 0);
 
     const bar = {
-      name: moment(day).format('D'),
-      profit: sum,
+      x: moment(day).format('D'),
+      y: sum,
     };
 
     data.push(bar);
@@ -76,8 +76,8 @@ export const getLastWeekData = (orders) => {
     }, 0);
 
     const bar = {
-      name: `${i} ${moment.weekdaysShort(moment(day).weekday())}`,
-      profit: sum,
+      x: `${i} ${moment.weekdaysShort(moment(day).weekday())}`,
+      y: sum,
     };
 
     data.push(bar);

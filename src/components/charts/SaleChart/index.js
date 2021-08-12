@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import {
-  BarChart,
-  Bar,
+  XYPlot,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
+  VerticalGridLines,
+  HorizontalGridLines,
+  VerticalBarSeries,
+} from 'react-vis';
+import '../../../../node_modules/react-vis/dist/style.css';
 import Heading from '../../Heading';
 import Button from '@material-ui/core/Button';
+import { getPercent } from '../../../helpers';
 import { useSelector } from 'react-redux';
 import { getOrders } from '../../../redux/selectors';
 import { getLastYearData, getLastMonthData, getLastWeekData } from './utils';
@@ -22,11 +22,23 @@ const charts = {
   lastWeek: 'lastWeek',
 };
 
-const SaleChart = ({ width, height }) => {
+const chartWidth = 40;
+const chartHeight = 30;
+
+const SaleChart = () => {
   const orders = useSelector(getOrders);
 
   const [activeChart, setActiveChart] = useState(charts.lastYear);
   const [data, setData] = useState([]);
+  const [size, setSize] = useState([
+    getPercent(chartWidth, window.innerWidth),
+    getPercent(chartHeight, window.innerHeight),
+  ]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     switch (activeChart) {
@@ -39,6 +51,13 @@ const SaleChart = ({ width, height }) => {
         return setData(getLastYearData(orders));
     }
   }, [activeChart, orders]);
+
+  const handleResize = () => {
+    const w = getPercent(chartWidth, window.innerWidth);
+    const h = getPercent(chartHeight, window.innerHeight);
+
+    setSize([w, h]);
+  };
 
   const handleChangeChart = (chart) => {
     setActiveChart(chart);
@@ -77,33 +96,21 @@ const SaleChart = ({ width, height }) => {
   );
 
   return (
-    <div style={{ width, height }}>
+    <div style={{ width: size[0] }}>
       {renderTopWrapper()}
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-          barSize={20}
-        >
-          <XAxis
-            dataKey="name"
-            scale="point"
-            padding={{ left: 10, right: 10 }}
-          />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey="profit" fill="#8884d8" background={{ fill: '#eee' }} />
-        </BarChart>
-      </ResponsiveContainer>
+      <XYPlot
+        margin={{ left: 70 }}
+        xType="ordinal"
+        width={size[0]}
+        height={size[1]}
+        xDistance={100}
+      >
+        <VerticalGridLines />
+        <HorizontalGridLines />
+        <XAxis />
+        <YAxis />
+        <VerticalBarSeries data={data} />
+      </XYPlot>
     </div>
   );
 };
