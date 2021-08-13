@@ -20,5 +20,6 @@ export const itemsCells = [
   { id: 'name', numeric: true, disablePadding: false, label: 'Name' },
   { id: 'category', numeric: true, disablePadding: false, label: 'Category' },
   { id: 'price', numeric: true, disablePadding: false, label: 'Price' },
+  { id: 'inCartQuantity', numeric: true, disablePadding: false, label: 'Qty.' },
   { id: 'image', numeric: true, disablePadding: false, label: 'Image' },
 ];

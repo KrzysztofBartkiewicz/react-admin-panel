@@ -45,13 +45,16 @@ const NavigationTemplate = ({ children }) => {
       (order) => order.id === currentCustomerId
     );
 
-    itemsData = currentCustomer.items.map((item) => ({
-      id: item.id,
-      name: item.name,
-      category: item.category,
-      price: item.price,
-      image: item.image,
-    }));
+    itemsData = currentCustomer.items.map(
+      ({ id, name, category, price, inCartQuantity, image }) => ({
+        id,
+        name,
+        category,
+        price,
+        inCartQuantity,
+        image,
+      })
+    );
 
     title = `${currentCustomer.firstName} ${currentCustomer.lastName} ${currentCustomer.createTime}`;
   }

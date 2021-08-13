@@ -15,7 +15,6 @@ const App = () => {
     const subscribeAllOrders = allOrdersCollection.onSnapshot((snapshot) => {
       const dataFromOrdersCollections = snapshot.docs.map((doc) => {
         return {
-          orderId: doc.id,
           ...doc.data(),
         };
       });
@@ -26,7 +25,6 @@ const App = () => {
       (snapshot) => {
         const dataFromDeletedOrdersCollection = snapshot.docs.map((doc) => {
           return {
-            orderId: doc.id,
             ...doc.data(),
           };
         });
