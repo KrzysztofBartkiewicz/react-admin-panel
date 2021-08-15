@@ -14,3 +14,8 @@ export const StyledH3 = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   color: ${({ theme }) => theme.colors.text};
 `;
+
+export const StyledH4 = styled.h4`
+  font-size: ${({ theme }) => theme.fontSizes.s};
+  color: ${({ theme }) => theme.colors.text};
+`;

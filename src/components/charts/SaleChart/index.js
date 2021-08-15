@@ -14,7 +14,12 @@ import { getPercent } from '../../../helpers';
 import { useSelector } from 'react-redux';
 import { getOrders } from '../../../redux/selectors';
 import { getLastYearData, getLastMonthData, getLastWeekData } from './utils';
-import { StyledButtonWrapper, StyledTopWrapper } from './StyledSaleChart';
+import {
+  StyledButtonWrapper,
+  StyledSaleChart,
+  StyledTopWrapper,
+} from './StyledSaleChart';
+import { CircularProgress } from '@material-ui/core';
 
 const charts = {
   lastYear: 'lastYear',
@@ -22,8 +27,8 @@ const charts = {
   lastWeek: 'lastWeek',
 };
 
-const chartWidth = 40;
-const chartHeight = 30;
+const chartWidth = 30;
+const chartHeight = 20;
 
 const SaleChart = () => {
   const orders = useSelector(getOrders);
@@ -96,22 +101,28 @@ const SaleChart = () => {
   );
 
   return (
-    <div style={{ width: size[0] }}>
-      {renderTopWrapper()}
-      <XYPlot
-        margin={{ left: 70 }}
-        xType="ordinal"
-        width={size[0]}
-        height={size[1]}
-        xDistance={100}
-      >
-        <VerticalGridLines />
-        <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
-        <VerticalBarSeries data={data} />
-      </XYPlot>
-    </div>
+    <StyledSaleChart width={size[0]} minHeight={size[1]}>
+      {orders.length !== 0 ? (
+        <div>
+          {renderTopWrapper()}
+          <XYPlot
+            margin={{ left: 70 }}
+            xType="ordinal"
+            width={size[0]}
+            height={size[1]}
+            xDistance={100}
+          >
+            <VerticalGridLines />
+            <HorizontalGridLines />
+            <XAxis />
+            <YAxis />
+            <VerticalBarSeries barWidth={0.5} data={data} />
+          </XYPlot>
+        </div>
+      ) : (
+        <CircularProgress />
+      )}
+    </StyledSaleChart>
   );
 };
 

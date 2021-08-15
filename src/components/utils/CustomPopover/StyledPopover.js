@@ -7,7 +7,7 @@ export const StyledBackdrop = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: transparent;
-  z-index: 1000;
+  z-index: 10000;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 `;
 

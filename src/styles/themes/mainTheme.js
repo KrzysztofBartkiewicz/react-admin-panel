@@ -8,6 +8,7 @@ const mainTheme = {
     blueLight: '#F4F7FE',
     pink: '#FF007C',
     velvet: '#7D00B5',
+    grey: '#c3c3c3',
     white: '#fff',
   },
 
