@@ -12,6 +12,7 @@ const initialState = {
   selectedItems: [],
   orders: [],
   deletedOrders: [],
+  weather: null,
 };
 
 const appReducer = (state = initialState, actions) => {
@@ -100,6 +101,12 @@ const appReducer = (state = initialState, actions) => {
       return {
         ...state,
         selectedOrdersToDelete: [],
+      };
+
+    case actionsTypes.SET_WEATHER:
+      return {
+        ...state,
+        weather: payload,
       };
 
     default:

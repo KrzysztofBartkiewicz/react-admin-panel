@@ -10,3 +10,4 @@ export const getSelectedItems = (state) => state.selectedItems;
 export const getDeletedOrders = (state) => state.deletedOrders;
 export const getSelectedOrdersToDelete = (state) =>
   state.selectedOrdersToDelete;
+export const getWeather = (state) => state.weather;

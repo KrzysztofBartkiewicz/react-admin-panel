@@ -67,3 +67,8 @@ export const setSelectedOrdersToDelete = (itemsIdsArr) => ({
 export const removeSelectedOrdersToDelete = () => ({
   type: actionTypes.REMOVE_SELECTED_ORDERS_TO_DELETE,
 });
+
+export const setWeather = (weather) => ({
+  type: actionTypes.SET_WEATHER,
+  payload: weather,
+});
