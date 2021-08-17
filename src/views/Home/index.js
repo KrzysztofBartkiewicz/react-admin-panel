@@ -4,14 +4,16 @@ import Minichart from '../../components/charts/Minichart';
 import Heading from '../../components/Heading';
 import Weather from '../../components/Weather';
 import { StyledHome } from './StyledHome';
-import mainTheme from '../../styles/themes/mainTheme';
 
 const Home = () => {
   return (
     <StyledHome>
       <Heading headingType="h1">Home</Heading>
       <SaleChart width="80%" height="30%" />
-      <Minichart color={mainTheme.colors.blueMenu} />
+      <Minichart type="orders">Total Income</Minichart>
+      <Minichart type="users">Total Users</Minichart>
+      <Minichart type="visits">Total Page Visits</Minichart>
+      <Minichart type="comments">Total Comments</Minichart>
       <Weather />
     </StyledHome>
   );

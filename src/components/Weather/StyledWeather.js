@@ -28,13 +28,14 @@ export const StyledCondition = styled.div`
 `;
 
 export const StyledCurrentWeather = styled.div`
-  max-width: 18rem;
+  max-width: 20rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 `;
 
 export const StyledCurrentTemp = styled.span`
+  margin-left: 2rem;
   font-size: 4rem;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;

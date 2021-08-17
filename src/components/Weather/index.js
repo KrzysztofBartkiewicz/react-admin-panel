@@ -24,15 +24,15 @@ const Weather = () => {
   const renderTopWrapper = () => (
     <StyledTopWrapper>
       <StyledCurrentWeather>
-        <StyledCurrentTemp>
-          {weather &&
-            `${weather.current.temp.toFixed(0)}${String.fromCharCode(176)}C`}
-        </StyledCurrentTemp>
         {weather &&
           createElement(getWeatherIcon(weather.current.weather[0].icon), {
             width: '8rem',
             height: '8rem',
           })}
+        <StyledCurrentTemp>
+          {weather &&
+            `${weather.current.temp.toFixed(0)}${String.fromCharCode(176)}C`}
+        </StyledCurrentTemp>
         <StyledCurrentDecs>
           {weather && capitalizeAll(weather.current.weather[0].description)}
         </StyledCurrentDecs>

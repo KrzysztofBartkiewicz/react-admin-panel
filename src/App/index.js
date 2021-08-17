@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import GlobalStylesTemplate from '../templates/GlobalStylesTemplate';
 import Router from '../router';
 import axios from 'axios';
@@ -10,10 +10,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDeletedOrders, setOrders, setWeather } from '../redux/actions';
 import { getOWEndpoint } from '../helpers/urls';
 import { getOrders } from '../redux/selectors';
-import data from '../data/data.json';
+import ordersData from '../data/data.json';
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const [data, setData] = useState([]);
+
+  setTimeout(() => {
+    setData(ordersData);
+  }, 2000);
+
+  useEffect(() => dispatch(setOrders(data)), [data]);
 
   useEffect(() => {
     // const subscribeAllOrders = allOrdersCollection.onSnapshot((snapshot) => {
@@ -35,8 +43,6 @@ const App = () => {
     //     dispatch(setDeletedOrders(dataFromDeletedOrdersCollection));
     //   }
     // );
-
-    dispatch(setOrders(data));
 
     axios
       .get(getOWEndpoint())
