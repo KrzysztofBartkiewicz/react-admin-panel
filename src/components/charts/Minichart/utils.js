@@ -27,7 +27,17 @@ export const getTotalOrdersAvarage = (orders) => {
   });
 
   const max = Math.max(...avarages);
-  return { avarages, max };
+
+  const percent = (
+    (avarages[avarages.length - 1] / avarages[avarages.length - 2]) * 100 -
+    100
+  ).toFixed(0);
+
+  return {
+    avarages,
+    max,
+    percent: percent > 0 ? `+ ${Math.abs(percent)}` : `- ${Math.abs(percent)}`,
+  };
 };
 
 export const getTotalUsers = (orders) => {
@@ -59,7 +69,17 @@ export const getTotalUsers = (orders) => {
   });
 
   const max = Math.max(...avarages);
-  return { avarages, max };
+
+  const percent = (
+    (avarages[avarages.length - 1] / avarages[avarages.length - 2]) * 100 -
+    100
+  ).toFixed(0);
+
+  return {
+    avarages,
+    max,
+    percent: percent > 0 ? `+ ${Math.abs(percent)}` : `- ${Math.abs(percent)}`,
+  };
 };
 
 export const getTotalVisits = () => {
@@ -68,7 +88,16 @@ export const getTotalVisits = () => {
     .map(() => Math.floor(Math.random() * (100000 - 1000)) + 1000);
   const max = 100000;
 
-  return { avarages, max };
+  const percent = (
+    (avarages[avarages.length - 1] / avarages[avarages.length - 2]) * 100 -
+    100
+  ).toFixed(0);
+
+  return {
+    avarages,
+    max,
+    percent: percent > 0 ? `+ ${Math.abs(percent)}` : `- ${Math.abs(percent)}`,
+  };
 };
 
 export const getTotalComments = () => {
@@ -77,5 +106,14 @@ export const getTotalComments = () => {
     .map(() => Math.floor(Math.random() * (100 - 1)) + 1);
   const max = 100;
 
-  return { avarages, max };
+  const percent = (
+    (avarages[avarages.length - 1] / avarages[avarages.length - 2]) * 100 -
+    100
+  ).toFixed(0);
+
+  return {
+    avarages,
+    max,
+    percent: percent > 0 ? `+ ${Math.abs(percent)}` : `- ${Math.abs(percent)}`,
+  };
 };

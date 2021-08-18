@@ -3,7 +3,12 @@ import { useSelector } from 'react-redux';
 import { getOrders } from '../../../redux/selectors';
 import Heading from '../../Heading';
 import Spinner from '../../utils/Spinner';
-import { StyledBar, StyledInner, StyledWrapper } from './StyledMinichart';
+import {
+  StyledBar,
+  StyledInner,
+  StyledPercent,
+  StyledWrapper,
+} from './StyledMinichart';
 import {
   getTotalComments,
   getTotalOrdersAvarage,
@@ -21,19 +26,19 @@ const Minichart = ({ type, children, className }) => {
       switch (type) {
         case 'orders':
           setData(getTotalOrdersAvarage(orders));
-          setColor('red');
+          setColor('#FF2626');
           break;
         case 'users':
           setData(getTotalUsers(orders));
-          setColor('blue');
+          setColor('#2940D3');
           break;
         case 'visits':
           setData(getTotalVisits());
-          setColor('orange');
+          setColor('#FFC107');
           break;
         case 'comments':
           setData(getTotalComments());
-          setColor('purple');
+          setColor('#AE00FB');
         default:
           break;
       }
@@ -61,6 +66,9 @@ const Minichart = ({ type, children, className }) => {
                 );
               })}
           </StyledInner>
+          <StyledPercent color={color}>
+            <span>{data && data.percent}%</span>
+          </StyledPercent>
         </>
       ) : (
         <Spinner />

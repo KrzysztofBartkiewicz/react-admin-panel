@@ -1,10 +1,16 @@
 import styled, { css } from 'styled-components';
+import { lighten } from 'polished';
 
 export const StyledWrapper = styled.div`
   padding: 1rem;
   border: 1px solid ${({ theme }) => theme.colors.grey};
   width: 100%;
+  height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
 
 export const StyledInner = styled.div`
@@ -20,4 +26,21 @@ export const StyledBar = styled.div`
     background-color: ${color};
     height: ${height}px;
   `}
+`;
+
+export const StyledPercent = styled.div`
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.8rem;
+  background-color: ${({ color }) => lighten(0.35, color)};
+
+  span {
+    ${({ theme, color }) => css`
+      font-size: ${theme.fontSizes.xl};
+      font-weight: ${theme.fontWeights.semiBold};
+      color: ${color};
+    `}
+  }
 `;
