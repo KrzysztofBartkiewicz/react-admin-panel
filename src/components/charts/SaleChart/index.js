@@ -27,10 +27,10 @@ const charts = {
   lastWeek: 'lastWeek',
 };
 
-const chartWidth = 30;
+const chartWidth = 40;
 const chartHeight = 20;
 
-const SaleChart = () => {
+const SaleChart = ({ className }) => {
   const orders = useSelector(getOrders);
 
   const [activeChart, setActiveChart] = useState(charts.lastYear);
@@ -101,7 +101,7 @@ const SaleChart = () => {
   );
 
   return (
-    <StyledSaleChart width={size[0]} minHeight={size[1]}>
+    <StyledSaleChart className={className}>
       {orders.length !== 0 ? (
         <div>
           {renderTopWrapper()}

@@ -1,18 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const StyledSaleChart = styled.div`
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
-
-  ${({ width, minHeight }) => css`
-    width: ${width}px;
-    min-height: ${minHeight}px;
-  `}
+  justify-content: center; */
 `;
 
 export const StyledTopWrapper = styled.div`
-  padding: 3rem 0;
+  padding-bottom: 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -18,7 +18,7 @@ import {
   StyledDailyForecast,
 } from './StyledWeather';
 
-const Weather = () => {
+const Weather = ({ className }) => {
   const weather = useSelector(getWeather);
 
   const renderTopWrapper = () => (
@@ -111,7 +111,7 @@ const Weather = () => {
   );
 
   return (
-    <StyledWeather>
+    <StyledWeather className={className}>
       <StyledHeading headingType="h4">Weather</StyledHeading>
       {renderTopWrapper()}
       {renderConditions()}

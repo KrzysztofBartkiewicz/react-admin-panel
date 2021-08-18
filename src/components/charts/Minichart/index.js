@@ -10,7 +10,7 @@ import {
   getTotalVisits,
 } from './utils';
 
-const Minichart = ({ type, children }) => {
+const Minichart = ({ type, children, className }) => {
   const orders = useSelector(getOrders);
   const [data, setData] = useState(null);
   const [color, setColor] = useState('transparent');
@@ -40,7 +40,7 @@ const Minichart = ({ type, children }) => {
   }, [orders]);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className={className}>
       <Heading headingType="h4">{children}</Heading>
       <StyledInner>
         {data &&
