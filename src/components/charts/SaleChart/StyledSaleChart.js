@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const StyledSaleChart = styled.div`
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
+  position: relative;
+  width: 100%;
+  height: 100%;
 `;
 
 export const StyledTopWrapper = styled.div`

@@ -10,16 +10,16 @@ import {
 import '../../../../node_modules/react-vis/dist/style.css';
 import Heading from '../../Heading';
 import Button from '@material-ui/core/Button';
+import Spinner from '../../utils/Spinner';
 import { getPercent } from '../../../helpers';
 import { useSelector } from 'react-redux';
 import { getOrders } from '../../../redux/selectors';
 import { getLastYearData, getLastMonthData, getLastWeekData } from './utils';
 import {
   StyledButtonWrapper,
-  StyledSaleChart,
   StyledTopWrapper,
+  StyledSaleChart,
 } from './StyledSaleChart';
-import { CircularProgress } from '@material-ui/core';
 
 const charts = {
   lastYear: 'lastYear',
@@ -120,7 +120,7 @@ const SaleChart = ({ className }) => {
           </XYPlot>
         </div>
       ) : (
-        <CircularProgress />
+        <Spinner />
       )}
     </StyledSaleChart>
   );

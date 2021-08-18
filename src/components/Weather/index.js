@@ -5,6 +5,7 @@ import { getWeather } from '../../redux/selectors';
 import { capitalizeAll } from '../../helpers';
 import getWeatherIcon from '../../helpers/weatherIcons';
 import Paragraph from '../Paragraph';
+import Spinner from '../utils/Spinner';
 import {
   StyledCurrentDecs,
   StyledCurrentTemp,
@@ -112,10 +113,16 @@ const Weather = ({ className }) => {
 
   return (
     <StyledWeather className={className}>
-      <StyledHeading headingType="h4">Weather</StyledHeading>
-      {renderTopWrapper()}
-      {renderConditions()}
-      {renderBottomWrapper()}
+      {weather ? (
+        <>
+          <StyledHeading headingType="h4">Weather</StyledHeading>
+          {renderTopWrapper()}
+          {renderConditions()}
+          {renderBottomWrapper()}
+        </>
+      ) : (
+        <Spinner />
+      )}
     </StyledWeather>
   );
 };

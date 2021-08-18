@@ -6,6 +6,7 @@ export const StyledWeather = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.grey};
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const StyledHeading = styled(Heading)`

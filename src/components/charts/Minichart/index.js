@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getOrders } from '../../../redux/selectors';
 import Heading from '../../Heading';
+import Spinner from '../../utils/Spinner';
 import { StyledBar, StyledInner, StyledWrapper } from './StyledMinichart';
 import {
   getTotalComments,
@@ -41,21 +42,29 @@ const Minichart = ({ type, children, className }) => {
 
   return (
     <StyledWrapper className={className}>
-      <Heading headingType="h4">{children}</Heading>
-      <StyledInner>
-        {data &&
-          data.avarages.map((bar, index) => {
-            const barHeight = data.max / 5.5;
+      {orders.length !== 0 ? (
+        <>
+          <Heading headingType="h4">{children}</Heading>
+          <StyledInner>
+            {data &&
+              data.avarages.map((bar, index) => {
+                const barHeight = data.max / 5.5;
 
-            return (
-              <StyledBar
-                key={index}
-                color={color}
-                height={Math.ceil((data.max / barHeight) * (bar / barHeight))}
-              />
-            );
-          })}
-      </StyledInner>
+                return (
+                  <StyledBar
+                    key={index}
+                    color={color}
+                    height={Math.ceil(
+                      (data.max / barHeight) * (bar / barHeight)
+                    )}
+                  />
+                );
+              })}
+          </StyledInner>
+        </>
+      ) : (
+        <Spinner />
+      )}
     </StyledWrapper>
   );
 };

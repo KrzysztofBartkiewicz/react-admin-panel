@@ -4,6 +4,7 @@ export const StyledWrapper = styled.div`
   padding: 1rem;
   border: 1px solid ${({ theme }) => theme.colors.grey};
   width: 100%;
+  position: relative;
 `;
 
 export const StyledInner = styled.div`
