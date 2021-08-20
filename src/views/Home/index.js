@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <StyledHome>
       <StyledHeading headingType="h1">Home</StyledHeading>
-      <StyledSaleChart width="80%" height="30%" />
+      <StyledSaleChart />
       <StyledOrdersChart type="orders">Total Income</StyledOrdersChart>
       <StyledUsersChart type="users">Total Users</StyledUsersChart>
       <StyledVisitsChart type="visits">Total Page Visits</StyledVisitsChart>

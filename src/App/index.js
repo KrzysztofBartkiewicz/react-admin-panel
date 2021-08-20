@@ -6,10 +6,9 @@ import {
   allOrdersCollection,
   deletedOrdersCollection,
 } from '../firebase/firestoreUtils';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setDeletedOrders, setOrders, setWeather } from '../redux/actions';
 import { getOWEndpoint } from '../helpers/urls';
-import { getOrders } from '../redux/selectors';
 import ordersData from '../data/data.json';
 
 const App = () => {

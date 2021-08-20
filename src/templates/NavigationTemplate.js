@@ -5,6 +5,7 @@ import Modal from '../components/utils/MaterialModal';
 import ItemsTable from '../components/tables/MaterialTable';
 import CustomPopover from '../components/utils/CustomPopover';
 import AlertDialog from '../components/utils/MaterialDialog';
+import Header from '../components/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsCells } from '../helpers/tableCells';
 import { deleteOrders } from '../firebase/firestoreUtils';
@@ -107,6 +108,7 @@ const NavigationTemplate = ({ children }) => {
         description="Are you sure you want to continue?"
       />
       <Navbar />
+      <Header />
       {children}
     </>
   );

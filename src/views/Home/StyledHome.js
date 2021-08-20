@@ -45,5 +45,5 @@ export const StyledCommentsChart = styled(Minichart)`
 
 export const StyledWeather = styled(Weather)`
   grid-row: 4;
-  grid-column: span 7;
+  grid-column: span 5;
 `;
