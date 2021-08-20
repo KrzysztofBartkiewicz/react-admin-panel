@@ -1,5 +1,4 @@
 import React from 'react';
-import Heading from '../../components/Heading';
 import OrdersTable from '../../components/tables/MaterialTable';
 import { StyledOrders } from './StyledOrders';
 import {
@@ -61,7 +60,6 @@ const Orders = () => {
 
   return (
     <StyledOrders>
-      <Heading headingType="h1">Orders</Heading>
       <OrdersTable
         headCells={ordersCells}
         rows={ordersData}

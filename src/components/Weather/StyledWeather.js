@@ -1,11 +1,10 @@
 import styled from 'styled-components';
+import ItemContainer from '../ItemContainer';
 import Heading from '../Heading';
 
-export const StyledWeather = styled.div`
+export const StyledWeather = styled(ItemContainer)`
   padding: 2rem;
-  border: 1px solid ${({ theme }) => theme.colors.grey};
-  display: flex;
-  flex-direction: column;
+  align-items: stretch;
   position: relative;
 `;
 

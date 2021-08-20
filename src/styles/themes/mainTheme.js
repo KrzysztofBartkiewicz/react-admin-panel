@@ -30,7 +30,7 @@ const mainTheme = {
   mixins: {
     views: css`
       flex-grow: 1;
-      padding: 8rem 2rem 0 3rem;
+      padding: 11rem 2rem 0 3rem;
       height: 100vh;
       overflow-y: auto;
     `,

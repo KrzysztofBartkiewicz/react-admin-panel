@@ -4,6 +4,7 @@ export const StyledNavbar = styled.nav`
   height: 100vh;
   min-width: 24rem;
   background-color: ${({ theme }) => theme.colors.blueMenu};
+  z-index: 100;
 `;
 
 export const StyledLogoWrapper = styled.div`

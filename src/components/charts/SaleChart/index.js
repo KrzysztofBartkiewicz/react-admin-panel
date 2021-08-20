@@ -11,6 +11,7 @@ import '../../../../node_modules/react-vis/dist/style.css';
 import Heading from '../../Heading';
 import Button from '@material-ui/core/Button';
 import Spinner from '../../utils/Spinner';
+import Paper from '@material-ui/core/Paper';
 import { getPercent } from '../../../helpers';
 import { useSelector } from 'react-redux';
 import { getOrders } from '../../../redux/selectors';
@@ -27,8 +28,8 @@ const charts = {
   lastWeek: 'lastWeek',
 };
 
-const chartWidth = 40;
-const chartHeight = 20;
+const chartWidth = 38;
+const chartHeight = 17;
 
 const SaleChart = ({ className }) => {
   const orders = useSelector(getOrders);

@@ -1,14 +1,9 @@
 import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
+import ItemContainer from '../../ItemContainer';
 
-export const StyledWrapper = styled.div`
-  padding: 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.grey};
-  width: 100%;
-  height: 100%;
+export const StyledWrapper = styled(ItemContainer)`
   position: relative;
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
 `;

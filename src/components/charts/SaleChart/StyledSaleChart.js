@@ -1,9 +1,8 @@
 import styled from 'styled-components';
+import ItemContainer from '../../ItemContainer';
 
-export const StyledSaleChart = styled.div`
+export const StyledSaleChart = styled(ItemContainer)`
   position: relative;
-  width: 100%;
-  height: 100%;
 `;
 
 export const StyledTopWrapper = styled.div`

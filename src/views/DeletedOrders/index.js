@@ -1,5 +1,4 @@
 import React from 'react';
-import Heading from '../../components/Heading';
 import OrdersTable from '../../components/tables/MaterialTable';
 import { StyledDeleted } from './StyledFilter';
 import { ordersCells } from '../../helpers/tableCells';
@@ -50,7 +49,6 @@ const DeletedOrders = () => {
 
   return (
     <StyledDeleted>
-      <Heading headingType="h1">Deleted Orders</Heading>
       <OrdersTable
         headCells={ordersCells}
         rows={ordersData}

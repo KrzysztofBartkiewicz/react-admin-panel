@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyledHome,
-  StyledHeading,
   StyledSaleChart,
   StyledOrdersChart,
   StyledUsersChart,
@@ -13,7 +12,6 @@ import {
 const Home = () => {
   return (
     <StyledHome>
-      <StyledHeading headingType="h1">Home</StyledHeading>
       <StyledSaleChart />
       <StyledOrdersChart type="orders">Total Income</StyledOrdersChart>
       <StyledUsersChart type="users">Total Users</StyledUsersChart>
