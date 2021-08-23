@@ -2,6 +2,7 @@ import { firestore } from './firebaseConfig';
 
 export const allOrdersCollection = firestore.collection('allOrders');
 export const deletedOrdersCollection = firestore.collection('deletedOrders');
+export const usersCollection = firestore.collection('users');
 
 export const deleteOrders = (ordersArr) => {
   ordersArr.forEach((order) => {

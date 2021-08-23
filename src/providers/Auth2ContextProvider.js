@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import Auth2Context from '../context/Auth2Context';
+import React, { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Auth2Context, AuthContext } from '../context';
+import { setAdminUser } from '../redux/actions';
+import { getAdminUser } from '../redux/selectors';
 
 const gapi = window.gapi;
 
 const Auth2ContextProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
+  const adminUser = useSelector(getAdminUser);
+  const { currentUser } = useContext(AuthContext);
 
-  const signIn = () => {
+  const gapiLogIn = () => {
     const auth2 = gapi.auth2.getAuthInstance();
     if (auth2.isSignedIn.get()) {
       console.log('already signed in');
@@ -14,15 +19,15 @@ const Auth2ContextProvider = ({ children }) => {
     }
 
     auth2.signIn().catch((error) => {
-      console.error(`sign in error: ${error}`);
+      console.error(`gapi: sign in error: ${error}`);
     });
   };
 
-  const signOut = () => {
+  const gapiLogOut = () => {
     console.log('signing out...');
     const auth2 = gapi.auth2.getAuthInstance();
     if (!auth2.isSignedIn.get()) {
-      console.log('Not signed in!');
+      console.log('gapi: not signed in!');
       return;
     }
 
@@ -34,33 +39,30 @@ const Auth2ContextProvider = ({ children }) => {
   const updateSignIn = (isSignIn) => {
     if (isSignIn) {
       const auth2 = gapi.auth2.getAuthInstance();
-      const currentUser = auth2.currentUser.get();
-      const profile = currentUser.getBasicProfile();
+      const user = auth2.currentUser.get();
+      const profile = user.getBasicProfile();
 
-      const user = {
+      const userData = {
         id: profile.getId(),
         name: profile.getName(),
         email: profile.getEmail(),
         surname: profile.getFamilyName(),
       };
-      setCurrentUser(user);
+
+      dispatch(setAdminUser(userData));
       console.log('gapi: user signed in!');
     } else {
-      setCurrentUser(null);
+      dispatch(setAdminUser(null));
       console.log('gapi: user signed out');
     }
   };
 
   useEffect(() => {
-    const init = () => {
-      gapi.load('client:auth2', initClient);
-    };
-
     const initClient = () => {
       gapi.client
         .init({
           apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-          clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+          clientId: currentUser.adminKey,
           discoveryDocs: [
             'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest',
           ],
@@ -72,15 +74,15 @@ const Auth2ContextProvider = ({ children }) => {
           auth2.isSignedIn.listen(updateSignIn);
           updateSignIn(auth2.isSignedIn.get());
         })
-
         .catch((err) => console.log(err));
     };
 
-    init();
-  }, []);
+    if (currentUser && currentUser.adminKey) {
+      gapi.load('client:auth2', initClient);
+    }
+  }, [currentUser]);
 
-  const value = { currentUser, signIn, signOut };
-
+  const value = { gapiLogIn, gapiLogOut, adminUser };
   return (
     <Auth2Context.Provider value={value}>{children}</Auth2Context.Provider>
   );
