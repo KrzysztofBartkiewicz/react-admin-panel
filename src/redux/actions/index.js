@@ -72,3 +72,18 @@ export const setWeather = (weather) => ({
   type: actionTypes.SET_WEATHER,
   payload: weather,
 });
+
+export const setCurrentUser = (user) => ({
+  type: actionTypes.SET_CURRENT_USER,
+  payload: user,
+});
+
+export const setAdminUser = (user) => ({
+  type: actionTypes.SET_ADMIN_USER,
+  payload: user,
+});
+
+export const setEmails = (emails) => ({
+  type: actionTypes.SET_EMAILS,
+  payload: emails,
+});

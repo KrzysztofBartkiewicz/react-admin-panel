@@ -11,3 +11,6 @@ export const getDeletedOrders = (state) => state.deletedOrders;
 export const getSelectedOrdersToDelete = (state) =>
   state.selectedOrdersToDelete;
 export const getWeather = (state) => state.weather;
+export const getCurrentUser = (state) => state.currentUser;
+export const getAdminUser = (state) => state.adminUser;
+export const getEmails = (state) => state.emails;

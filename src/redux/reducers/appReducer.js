@@ -13,6 +13,9 @@ const initialState = {
   orders: [],
   deletedOrders: [],
   weather: null,
+  currentUser: null,
+  adminUser: null,
+  emails: [],
 };
 
 const appReducer = (state = initialState, actions) => {
@@ -107,6 +110,24 @@ const appReducer = (state = initialState, actions) => {
       return {
         ...state,
         weather: payload,
+      };
+
+    case actionsTypes.SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: payload,
+      };
+
+    case actionsTypes.SET_ADMIN_USER:
+      return {
+        ...state,
+        adminUser: payload,
+      };
+
+    case actionsTypes.SET_EMAILS:
+      return {
+        ...state,
+        emails: payload,
       };
 
     default:
