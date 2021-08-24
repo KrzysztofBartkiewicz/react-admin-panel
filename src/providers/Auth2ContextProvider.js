@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Auth2Context, AuthContext } from '../context';
-import { setAdminUser } from '../redux/actions';
-import { getAdminUser } from '../redux/selectors';
+import { setAdminUser } from '../redux/appReducer/actions';
+import { getAdminUser } from '../redux/appReducer/selectors';
 
 const gapi = window.gapi;
 

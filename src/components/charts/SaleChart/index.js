@@ -11,10 +11,9 @@ import '../../../../node_modules/react-vis/dist/style.css';
 import Heading from '../../Heading';
 import Button from '@material-ui/core/Button';
 import Spinner from '../../utils/Spinner';
-import Paper from '@material-ui/core/Paper';
 import { getPercent } from '../../../helpers';
 import { useSelector } from 'react-redux';
-import { getOrders } from '../../../redux/selectors';
+import { getOrders } from '../../../redux/appReducer/selectors';
 import { getLastYearData, getLastMonthData, getLastWeekData } from './utils';
 import {
   StyledButtonWrapper,

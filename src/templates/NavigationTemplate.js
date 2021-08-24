@@ -18,7 +18,7 @@ import {
   handleDialogVisibility,
   removeSelectedOrders,
   setIsOrderEdited,
-} from '../redux/actions/';
+} from '../redux/appReducer/actions/';
 import {
   getCurrentOrderId,
   getImageAddress,
@@ -28,7 +28,7 @@ import {
   isDialogOpen,
   isModalOpen,
   isOrderEdited,
-} from '../redux/selectors';
+} from '../redux/appReducer/selectors';
 
 const NavigationTemplate = ({ children }) => {
   const orders = useSelector(getOrders);

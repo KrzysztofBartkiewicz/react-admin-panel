@@ -1,4 +1,4 @@
-import actionsTypes from '../actions/actionsTypes';
+import actionsTypes from './actions/actionsTypes';
 
 const initialState = {
   isModalOpen: false,
@@ -15,7 +15,6 @@ const initialState = {
   weather: null,
   currentUser: null,
   adminUser: null,
-  emails: [],
 };
 
 const appReducer = (state = initialState, actions) => {
@@ -122,12 +121,6 @@ const appReducer = (state = initialState, actions) => {
       return {
         ...state,
         adminUser: payload,
-      };
-
-    case actionsTypes.SET_EMAILS:
-      return {
-        ...state,
-        emails: payload,
       };
 
     default:

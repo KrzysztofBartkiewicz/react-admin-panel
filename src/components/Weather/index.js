@@ -1,7 +1,7 @@
 import React, { createElement } from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { getWeather } from '../../redux/selectors';
+import { getWeather } from '../../redux/appReducer/selectors';
 import { capitalizeAll } from '../../helpers';
 import getWeatherIcon from '../../helpers/weatherIcons';
 import Paragraph from '../Paragraph';

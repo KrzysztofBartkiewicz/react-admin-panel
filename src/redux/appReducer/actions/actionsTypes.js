@@ -16,7 +16,6 @@ const actionsTypes = {
   SET_WEATHER: 'SET_WEATHER',
   SET_CURRENT_USER: 'SET_CURRENT_USER',
   SET_ADMIN_USER: 'SET_ADMIN_USER',
-  SET_EMAILS: 'SET_EMAILS',
 };
 
 export default actionsTypes;

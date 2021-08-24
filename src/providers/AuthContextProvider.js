@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthContext } from '../context';
 import { auth, provider } from '../firebase/firebaseConfig';
 import { usersCollection } from '../firebase/firestoreUtils';
-import { setCurrentUser } from '../redux/actions';
-import { getCurrentUser } from '../redux/selectors';
+import { setCurrentUser } from '../redux/appReducer/actions';
+import { getCurrentUser } from '../redux/appReducer/selectors';
 
 const AuthContextProvider = ({ children }) => {
   const dispatch = useDispatch();

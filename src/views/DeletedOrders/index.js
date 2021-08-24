@@ -6,11 +6,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   getDeletedOrders,
   getSelectedOrdersToDelete,
-} from '../../redux/selectors';
+} from '../../redux/appReducer/selectors';
 import {
   removeSelectedOrdersToDelete,
   setSelectedOrdersToDelete,
-} from '../../redux/actions';
+} from '../../redux/appReducer/actions';
 import { restoreOrders } from '../../firebase/firestoreUtils';
 
 const DeletedOrders = () => {

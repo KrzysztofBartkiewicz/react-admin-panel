@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getOrders } from '../../../redux/selectors';
+import { getOrders } from '../../../redux/appReducer/selectors';
 import Heading from '../../Heading';
 import Spinner from '../../utils/Spinner';
 import {

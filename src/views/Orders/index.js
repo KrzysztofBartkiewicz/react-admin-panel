@@ -7,9 +7,9 @@ import {
   setCurrentOrderId,
   setIsOrderEdited,
   setSelectedOrders,
-} from '../../redux/actions';
+} from '../../redux/appReducer/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders, getSelectedOrders } from '../../redux/selectors';
+import { getOrders, getSelectedOrders } from '../../redux/appReducer/selectors';
 import { ordersCells } from '../../helpers/tableCells';
 
 const Orders = () => {

@@ -1,13 +1,12 @@
 import actionsTypes from './actionsTypes';
-import actionTypes from './actionsTypes';
 
 export const setOrders = (orders) => ({
-  type: actionTypes.SET_ORDERS,
+  type: actionsTypes.SET_ORDERS,
   payload: orders,
 });
 
 export const setIsOrderEdited = (value) => ({
-  type: actionTypes.SET_IS_ORDER_EDITED,
+  type: actionsTypes.SET_IS_ORDER_EDITED,
   payload: value,
 });
 
@@ -17,27 +16,27 @@ export const setDeletedOrders = (orders) => ({
 });
 
 export const setCurrentOrderId = (id) => ({
-  type: actionTypes.SET_CURRENT_ORDER_ID,
+  type: actionsTypes.SET_CURRENT_ORDER_ID,
   payload: id,
 });
 
 export const handleDialogVisibility = (value) => ({
-  type: actionTypes.HANDLE_DIALOG_VISIBILITY,
+  type: actionsTypes.HANDLE_DIALOG_VISIBILITY,
   payload: value,
 });
 
 export const handleModalVisibility = (value) => ({
-  type: actionTypes.HANDLE_MODAL_VISIBILITY,
+  type: actionsTypes.HANDLE_MODAL_VISIBILITY,
   payload: value,
 });
 
 export const setAnchor = (anchor) => ({
-  type: actionTypes.SET_ANCHOR,
+  type: actionsTypes.SET_ANCHOR,
   payload: anchor,
 });
 
 export const setImageAddress = (imgAddress) => ({
-  type: actionTypes.SET_IMAGE_ADDRESS,
+  type: actionsTypes.SET_IMAGE_ADDRESS,
   payload: imgAddress,
 });
 
@@ -60,30 +59,25 @@ export const removeSelectedItems = () => ({
 });
 
 export const setSelectedOrdersToDelete = (itemsIdsArr) => ({
-  type: actionTypes.SET_SLECTED_ORDERS_TO_DELETE,
+  type: actionsTypes.SET_SLECTED_ORDERS_TO_DELETE,
   payload: itemsIdsArr,
 });
 
 export const removeSelectedOrdersToDelete = () => ({
-  type: actionTypes.REMOVE_SELECTED_ORDERS_TO_DELETE,
+  type: actionsTypes.REMOVE_SELECTED_ORDERS_TO_DELETE,
 });
 
 export const setWeather = (weather) => ({
-  type: actionTypes.SET_WEATHER,
+  type: actionsTypes.SET_WEATHER,
   payload: weather,
 });
 
 export const setCurrentUser = (user) => ({
-  type: actionTypes.SET_CURRENT_USER,
+  type: actionsTypes.SET_CURRENT_USER,
   payload: user,
 });
 
 export const setAdminUser = (user) => ({
-  type: actionTypes.SET_ADMIN_USER,
+  type: actionsTypes.SET_ADMIN_USER,
   payload: user,
-});
-
-export const setEmails = (emails) => ({
-  type: actionTypes.SET_EMAILS,
-  payload: emails,
 });

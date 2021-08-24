@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAnchor } from '../../../redux/selectors';
+import { getAnchor } from '../../../redux/appReducer/selectors';
 import {
   setAnchor,
   setImageAddress,
   setIsOrderEdited,
-} from '../../../redux/actions';
+} from '../../../redux/appReducer/actions';
 import { StyledBackdrop, StyledPopover } from './StyledPopover';
 
 const CustomPopover = ({ children }) => {
