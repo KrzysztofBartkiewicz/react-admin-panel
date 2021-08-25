@@ -1,9 +1,10 @@
 const routes = {
   home: '/',
   orders: '/orders',
-  charts: '/charts',
+  mailbox: '/mailbox',
   deleted: '/deleted',
   settings: '/settings',
+  singleEmail: '/singleEmail',
 };
 
 export default routes;

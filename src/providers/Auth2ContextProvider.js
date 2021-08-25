@@ -37,6 +37,7 @@ const Auth2ContextProvider = ({ children }) => {
   };
 
   const updateSignIn = (isSignIn) => {
+    console.log('TEST', isSignIn);
     if (isSignIn) {
       const auth2 = gapi.auth2.getAuthInstance();
       const user = auth2.currentUser.get();
@@ -82,7 +83,7 @@ const Auth2ContextProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  const value = { gapiLogIn, gapiLogOut, adminUser };
+  const value = { gapiLogIn, gapiLogOut, adminUser, gapiLogIn };
   return (
     <Auth2Context.Provider value={value}>{children}</Auth2Context.Provider>
   );

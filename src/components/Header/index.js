@@ -1,31 +1,23 @@
 import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
-import Auth2Context from '../../context/Auth2Context';
+import { Auth2Context, AuthContext } from '../../context';
 import { StyledHeader, useStyles } from './StyledHeader';
 
 const Header = () => {
-  const { signIn, signOut, currentUser } = useContext(Auth2Context);
+  const { currentUser, signUpWithGoogle, logOut } = useContext(AuthContext);
+  const { gapiLogIn } = useContext(Auth2Context);
   const classes = useStyles();
 
   return (
     <StyledHeader>
-      {currentUser &&
-        (currentUser.id === process.env.REACT_APP_ADMIN_ID ? (
-          <Avatar className={classes.orange}>
-            {currentUser.name[0].toUpperCase()}
-          </Avatar>
-        ) : (
-          <Avatar className={classes.purple}>
-            {currentUser.name[0].toUpperCase()}
-          </Avatar>
-        ))}
+      <Button onClick={gapiLogIn}>Login</Button>
       {currentUser ? (
-        <Button variant="contained" color="secondary" onClick={signOut}>
+        <Button variant="contained" color="secondary" onClick={logOut}>
           Logout
         </Button>
       ) : (
-        <Button variant="contained" color="primary" onClick={signIn}>
+        <Button variant="contained" color="primary" onClick={signUpWithGoogle}>
           Login
         </Button>
       )}

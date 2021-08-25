@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import GlobalStylesTemplate from '../templates/GlobalStylesTemplate';
 import Router from '../router';
 import axios from 'axios';
@@ -7,20 +7,32 @@ import {
   deletedOrdersCollection,
 } from '../firebase/firestoreUtils';
 import { useDispatch } from 'react-redux';
-import { setDeletedOrders, setOrders, setWeather } from '../redux/actions';
+import {
+  setDeletedOrders,
+  setOrders,
+  setWeather,
+} from '../redux/appReducer/actions';
+import { setLabels, setThreads } from '../redux/gmailReducer/actions';
 import { getOWEndpoint } from '../helpers/urls';
 import ordersData from '../data/data.json';
+import { Auth2Context } from '../context';
+import { fetchLabels, fetchThreads } from '../utils/gmail';
 
 const App = () => {
   const dispatch = useDispatch();
+  const { adminUser } = useContext(Auth2Context);
 
-  const [data, setData] = useState([]);
+  useEffect(() => {
+    if (adminUser) {
+      fetchThreads()
+        .then((threads) => dispatch(setThreads(threads)))
+        .catch((err) => console.log(err));
 
-  setTimeout(() => {
-    setData(ordersData);
-  }, 2000);
-
-  useEffect(() => dispatch(setOrders(data)), [data]);
+      fetchLabels()
+        .then((labels) => dispatch(setLabels(labels)))
+        .catch((err) => console.log(err));
+    }
+  }, [adminUser]);
 
   useEffect(() => {
     // const subscribeAllOrders = allOrdersCollection.onSnapshot((snapshot) => {
@@ -42,6 +54,7 @@ const App = () => {
     //     dispatch(setDeletedOrders(dataFromDeletedOrdersCollection));
     //   }
     // );
+    dispatch(setOrders(ordersData));
 
     axios
       .get(getOWEndpoint())

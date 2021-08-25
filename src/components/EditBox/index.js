@@ -14,8 +14,8 @@ import Button from '@material-ui/core/Button';
 import AlertDialog from '../utils/MaterialDialog';
 import { StyledEditBox, useStyles } from './StyledEditBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsOrderEdited } from '../../redux/actions';
-import { getCurrentOrderId, getOrders } from '../../redux/selectors';
+import { setIsOrderEdited } from '../../redux/appReducer/actions';
+import { getCurrentOrderId, getOrders } from '../../redux/appReducer/selectors';
 import { updateOrder } from '../../firebase/firestoreUtils';
 import moment from 'moment';
 

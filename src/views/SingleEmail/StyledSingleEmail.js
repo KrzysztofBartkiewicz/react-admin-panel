@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const StyledCharts = styled.section`
+export const StyledSingleEmail = styled.section`
   ${({ theme }) => theme.mixins.views}
 `;

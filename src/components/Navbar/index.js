@@ -31,8 +31,8 @@ const Navbar = () => {
         </StyledNavItem>
 
         <StyledNavItem>
-          <NavigationLink to={routes.charts} icon={iconsTypes.ChartIcon}>
-            Charts
+          <NavigationLink to={routes.mailbox} icon={iconsTypes.ChartIcon}>
+            Mailbox
           </NavigationLink>
         </StyledNavItem>
 
