@@ -10,6 +10,21 @@ export const fetchLabels = async () => {
   return labels.result.labels;
 };
 
+export const patchTrashLabel = async () => {
+  const gmailApi = gapi.client.gmail.users;
+
+  const returned = await gmailApi.labels.patch({
+    userId: 'me',
+    id: 'TRASH',
+
+    resource: {
+      labelListVisibility: 'labelShow',
+    },
+  });
+
+  return returned;
+};
+
 export const fetchThreads = async () => {
   const threadsPromisesArr = [];
 
@@ -17,6 +32,7 @@ export const fetchThreads = async () => {
   const threadsList = await gmailApi.threads.list({
     userId: 'me',
     maxResults: 500,
+    includeSpamTrash: true,
   });
 
   threadsList.result.threads.forEach(({ id }) =>

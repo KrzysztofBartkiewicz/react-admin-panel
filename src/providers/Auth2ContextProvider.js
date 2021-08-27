@@ -67,7 +67,8 @@ const Auth2ContextProvider = ({ children }) => {
           discoveryDocs: [
             'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest',
           ],
-          scope: 'https://www.googleapis.com/auth/gmail.compose',
+          scope:
+            'https://mail.google.com/ https://www.googleapis.com/auth/gmail.labels https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.compose',
         })
         .then(() => console.log('gapi: client initialized'))
         .then(() => {

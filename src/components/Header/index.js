@@ -6,11 +6,12 @@ import { StyledHeader, useStyles } from './StyledHeader';
 
 const Header = () => {
   const { currentUser, signUpWithGoogle, logOut } = useContext(AuthContext);
-  const { gapiLogIn } = useContext(Auth2Context);
+  const { gapiLogIn, gapiLogOut } = useContext(Auth2Context);
   const classes = useStyles();
 
   return (
     <StyledHeader>
+      <Button onClick={gapiLogOut}>Logout</Button>
       <Button onClick={gapiLogIn}>Login</Button>
       {currentUser ? (
         <Button variant="contained" color="secondary" onClick={logOut}>

@@ -16,7 +16,7 @@ import { setLabels, setThreads } from '../redux/gmailReducer/actions';
 import { getOWEndpoint } from '../helpers/urls';
 import ordersData from '../data/data.json';
 import { Auth2Context } from '../context';
-import { fetchLabels, fetchThreads } from '../utils/gmail';
+import { fetchLabels, fetchThreads, patchTrashLabel } from '../utils/gmail';
 
 const App = () => {
   const dispatch = useDispatch();
