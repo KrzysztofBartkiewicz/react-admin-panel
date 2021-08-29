@@ -29,7 +29,10 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    auth.signOut().then(() => console.log('firebase: logged out'));
+    auth
+      .signOut()
+      .then(() => window.location.reload())
+      .then(() => console.log('firebase: logged out'));
   };
 
   useEffect(() => {
@@ -51,7 +54,7 @@ const AuthContextProvider = ({ children }) => {
           }
         });
       } else {
-        dispatch(setCurrentUser(null));
+        dispatch(setCurrentUser('signedout'));
       }
     });
 

@@ -10,13 +10,16 @@ import Settings from '../views/Settings';
 import DeletedOrders from '../views/DeletedOrders';
 import SingleEmail from '../views/SingleEmail';
 import Login from '../views/Login';
+import Spinner from '../components/utils/Spinner';
 
 const Router = () => {
   const { currentUser } = useContext(AuthContext);
 
-  return (
+  const renderBrowserRouter = () => (
     <BrowserRouter>
-      {currentUser && <Redirect to={{ path: routes.home }} />}
+      {typeof currentUser === 'object' && (
+        <Redirect to={{ path: routes.home }} />
+      )}
       <Switch>
         <PrivateRoute
           exact
@@ -53,6 +56,8 @@ const Router = () => {
       </Switch>
     </BrowserRouter>
   );
+
+  return <>{currentUser ? renderBrowserRouter() : <Spinner />}</>;
 };
 
 export default Router;

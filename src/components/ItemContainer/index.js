@@ -4,10 +4,6 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: '1.5rem',
   },
 }));

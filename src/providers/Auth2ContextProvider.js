@@ -79,9 +79,9 @@ const Auth2ContextProvider = ({ children }) => {
     };
 
     if (currentUser && currentUser.adminKey) {
-      gapi.load('client:auth2', initClient);
+      gapi && gapi.load('client:auth2', initClient);
     }
-  }, [currentUser]);
+  }, [currentUser, gapi]);
 
   const value = { gapiLogIn, gapiLogOut, adminUser, gapiLogIn };
   return (
