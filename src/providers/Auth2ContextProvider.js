@@ -37,7 +37,6 @@ const Auth2ContextProvider = ({ children }) => {
   };
 
   const updateSignIn = (isSignIn) => {
-    console.log('TEST', isSignIn);
     if (isSignIn) {
       const auth2 = gapi.auth2.getAuthInstance();
       const user = auth2.currentUser.get();

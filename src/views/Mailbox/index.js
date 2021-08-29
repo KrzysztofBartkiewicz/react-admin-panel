@@ -55,7 +55,7 @@ const Mailbox = () => {
     dispatch(setIsThreadChecked(id));
   };
 
-  const handlePagin = (dir) => {
+  const handlePagination = (dir) => {
     if (dir === 'left' && pagination !== threadsByPage) {
       setPagination((prev) => prev - threadsByPage);
     } else if (dir === 'right' && threadsToRender.length > pagination) {
@@ -108,10 +108,10 @@ const Mailbox = () => {
       <StyledItemContainer>
         <StyledMailContainer>
           <StyledPaginButtons>
-            <IconButton onClick={() => handlePagin('left')}>
+            <IconButton onClick={() => handlePagination('left')}>
               <ArrowLeft style={{ fontSize: 40 }} />
             </IconButton>
-            <IconButton onClick={() => handlePagin('right')}>
+            <IconButton onClick={() => handlePagination('right')}>
               <ArrowRight style={{ fontSize: 40 }} />
             </IconButton>
           </StyledPaginButtons>

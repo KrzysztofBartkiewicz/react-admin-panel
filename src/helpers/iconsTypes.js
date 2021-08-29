@@ -5,6 +5,7 @@ import { ReactComponent as SettingsIcon } from '../assets/icons/settings-1.svg';
 import { ReactComponent as SettingsAltIcon } from '../assets/icons/settings.svg';
 import { ReactComponent as HouseIcon } from '../assets/icons/house.svg';
 import { ReactComponent as CancelIcon } from '../assets/icons/cancel.svg';
+import { ReactComponent as GoogleIcon } from '../assets/icons/google-icon.svg';
 
 const iconsTypes = {
   FolderIcon,
@@ -14,6 +15,7 @@ const iconsTypes = {
   SettingsIcon,
   HouseIcon,
   CancelIcon,
+  GoogleIcon,
 };
 
 export default iconsTypes;

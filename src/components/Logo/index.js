@@ -2,13 +2,18 @@ import React from 'react';
 import iconsTypes from '../../helpers/iconsTypes';
 import { StyledLogo, StyledLogoText } from './StyledLogo';
 
-const Logo = () => {
+const Logo = ({ color, className, big }) => {
   const { LogoIcon } = iconsTypes;
 
   return (
-    <StyledLogo>
-      <LogoIcon />
-      <StyledLogoText>XdDash</StyledLogoText>
+    <StyledLogo className={className}>
+      <LogoIcon
+        fill={color ? color : '#ffffff'}
+        style={big && { width: '6rem', height: '6rem' }}
+      />
+      <StyledLogoText big={big} color={color}>
+        XdDash
+      </StyledLogoText>
     </StyledLogo>
   );
 };

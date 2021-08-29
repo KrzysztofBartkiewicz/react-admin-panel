@@ -1,27 +1,56 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { AuthContext } from '../context';
 import routes from './routes';
-import NavigationTemplate from '../templates/NavigationTemplate';
+import PrivateRoute from './PrivateRoute';
 import Home from '../views/Home';
 import Orders from '../views/Orders';
 import Mailbox from '../views/Mailbox';
 import Settings from '../views/Settings';
 import DeletedOrders from '../views/DeletedOrders';
 import SingleEmail from '../views/SingleEmail';
+import Login from '../views/Login';
 
 const Router = () => {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <BrowserRouter>
-      <NavigationTemplate>
-        <Switch>
-          <Route exact path={routes.home} component={Home} />
-          <Route path={routes.orders} component={Orders} />
-          <Route path={routes.mailbox} component={Mailbox} />
-          <Route path={routes.deleted} component={DeletedOrders} />
-          <Route path={routes.settings} component={Settings} />
-          <Route path={routes.singleEmail} component={SingleEmail} />
-        </Switch>
-      </NavigationTemplate>
+      {currentUser && <Redirect to={{ path: routes.home }} />}
+      <Switch>
+        <PrivateRoute
+          exact
+          path={routes.home}
+          isLogged={currentUser}
+          component={Home}
+        />
+        <PrivateRoute
+          path={routes.orders}
+          isLogged={currentUser}
+          component={Orders}
+        />
+        <PrivateRoute
+          path={routes.mailbox}
+          isLogged={currentUser}
+          component={Mailbox}
+        />
+        <PrivateRoute
+          path={routes.deleted}
+          isLogged={currentUser}
+          component={DeletedOrders}
+        />
+        <PrivateRoute
+          path={routes.settings}
+          isLogged={currentUser}
+          component={Settings}
+        />
+        <PrivateRoute
+          path={routes.singleEmail}
+          isLogged={currentUser}
+          component={SingleEmail}
+        />
+        <Route path={routes.login} component={Login} />
+      </Switch>
     </BrowserRouter>
   );
 };

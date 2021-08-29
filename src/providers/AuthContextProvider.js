@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthContext } from '../context';
 import { auth, provider } from '../firebase/firebaseConfig';
@@ -13,6 +13,15 @@ const AuthContextProvider = ({ children }) => {
   const signUpWithGoogle = () => {
     auth
       .signInWithPopup(provider)
+      .then((user) => {
+        console.log('firebase: user sign in!', user);
+      })
+      .catch((err) => console.log('firebase :', err));
+  };
+
+  const logIn = (email, password) => {
+    auth
+      .signInWithEmailAndPassword(email, password)
       .then((user) => {
         console.log('firebase: user sign in!', user);
       })
@@ -51,6 +60,7 @@ const AuthContextProvider = ({ children }) => {
 
   const value = {
     logOut,
+    logIn,
     signUpWithGoogle,
     currentUser,
   };
