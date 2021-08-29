@@ -11,6 +11,7 @@ import DeletedOrders from '../views/DeletedOrders';
 import SingleEmail from '../views/SingleEmail';
 import Login from '../views/Login';
 import Spinner from '../components/utils/Spinner';
+import NotFound from '../views/NotFound';
 
 const Router = () => {
   const { currentUser } = useContext(AuthContext);
@@ -18,7 +19,7 @@ const Router = () => {
   const renderBrowserRouter = () => (
     <BrowserRouter>
       {typeof currentUser === 'object' && (
-        <Redirect to={{ path: routes.home }} />
+        <Redirect to={{ pathname: routes.home }} />
       )}
       <Switch>
         <PrivateRoute
@@ -53,6 +54,7 @@ const Router = () => {
           component={SingleEmail}
         />
         <Route path={routes.login} component={Login} />
+        <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
   );

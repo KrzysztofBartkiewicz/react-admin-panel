@@ -12,11 +12,11 @@ import {
   setOrders,
   setWeather,
 } from '../redux/appReducer/actions';
-import { setLabels, setThreads } from '../redux/gmailReducer/actions';
+import { setThreads } from '../redux/gmailReducer/actions';
 import { getOWEndpoint } from '../helpers/urls';
-import ordersData from '../data/data.json';
+// import ordersData from '../data/data.json';
 import { Auth2Context } from '../context';
-import { fetchLabels, fetchThreads, patchTrashLabel } from '../utils/gmail';
+import { fetchThreads } from '../utils/gmail';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,34 +27,30 @@ const App = () => {
       fetchThreads()
         .then((threads) => dispatch(setThreads(threads)))
         .catch((err) => console.log(err));
-
-      fetchLabels()
-        .then((labels) => dispatch(setLabels(labels)))
-        .catch((err) => console.log(err));
     }
   }, [adminUser]);
 
   useEffect(() => {
-    // const subscribeAllOrders = allOrdersCollection.onSnapshot((snapshot) => {
-    //   const dataFromOrdersCollections = snapshot.docs.map((doc) => {
-    //     return {
-    //       ...doc.data(),
-    //     };
-    //   });
-    //   dispatch(setOrders(dataFromOrdersCollections));
-    // });
+    const subscribeAllOrders = allOrdersCollection.onSnapshot((snapshot) => {
+      const dataFromOrdersCollections = snapshot.docs.map((doc) => {
+        return {
+          ...doc.data(),
+        };
+      });
+      dispatch(setOrders(dataFromOrdersCollections));
+    });
 
-    // const subscribeDeletedOrders = deletedOrdersCollection.onSnapshot(
-    //   (snapshot) => {
-    //     const dataFromDeletedOrdersCollection = snapshot.docs.map((doc) => {
-    //       return {
-    //         ...doc.data(),
-    //       };
-    //     });
-    //     dispatch(setDeletedOrders(dataFromDeletedOrdersCollection));
-    //   }
-    // );
-    dispatch(setOrders(ordersData));
+    const subscribeDeletedOrders = deletedOrdersCollection.onSnapshot(
+      (snapshot) => {
+        const dataFromDeletedOrdersCollection = snapshot.docs.map((doc) => {
+          return {
+            ...doc.data(),
+          };
+        });
+        dispatch(setDeletedOrders(dataFromDeletedOrdersCollection));
+      }
+    );
+    // dispatch(setOrders(ordersData));
 
     axios
       .get(getOWEndpoint())
