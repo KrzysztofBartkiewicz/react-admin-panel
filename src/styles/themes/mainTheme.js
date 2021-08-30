@@ -33,6 +33,7 @@ const mainTheme = {
       padding: 11rem 2rem 0 3rem;
       height: 100vh;
       overflow-y: auto;
+      position: relative;
     `,
   },
 };

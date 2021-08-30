@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledNavbar = styled.nav`
   height: 100vh;
-  min-width: 24rem;
+  min-width: 25rem;
   background-color: ${({ theme }) => theme.colors.blueMenu};
   z-index: 100;
 `;

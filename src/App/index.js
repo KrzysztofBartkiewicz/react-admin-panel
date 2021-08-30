@@ -14,7 +14,7 @@ import {
 } from '../redux/appReducer/actions';
 import { setThreads } from '../redux/gmailReducer/actions';
 import { getOWEndpoint } from '../helpers/urls';
-// import ordersData from '../data/data.json';
+import ordersData from '../data/data.json';
 import { Auth2Context } from '../context';
 import { fetchThreads } from '../utils/gmail';
 
@@ -31,26 +31,26 @@ const App = () => {
   }, [adminUser]);
 
   useEffect(() => {
-    const subscribeAllOrders = allOrdersCollection.onSnapshot((snapshot) => {
-      const dataFromOrdersCollections = snapshot.docs.map((doc) => {
-        return {
-          ...doc.data(),
-        };
-      });
-      dispatch(setOrders(dataFromOrdersCollections));
-    });
+    // const subscribeAllOrders = allOrdersCollection.onSnapshot((snapshot) => {
+    //   const dataFromOrdersCollections = snapshot.docs.map((doc) => {
+    //     return {
+    //       ...doc.data(),
+    //     };
+    //   });
+    //   dispatch(setOrders(dataFromOrdersCollections));
+    // });
 
-    const subscribeDeletedOrders = deletedOrdersCollection.onSnapshot(
-      (snapshot) => {
-        const dataFromDeletedOrdersCollection = snapshot.docs.map((doc) => {
-          return {
-            ...doc.data(),
-          };
-        });
-        dispatch(setDeletedOrders(dataFromDeletedOrdersCollection));
-      }
-    );
-    // dispatch(setOrders(ordersData));
+    // const subscribeDeletedOrders = deletedOrdersCollection.onSnapshot(
+    //   (snapshot) => {
+    //     const dataFromDeletedOrdersCollection = snapshot.docs.map((doc) => {
+    //       return {
+    //         ...doc.data(),
+    //       };
+    //     });
+    //     dispatch(setDeletedOrders(dataFromDeletedOrdersCollection));
+    //   }
+    // );
+    dispatch(setOrders(ordersData));
 
     axios
       .get(getOWEndpoint())
