@@ -1,14 +1,18 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 import FormInput from '../FormInput';
+import Paragraph from '../../Paragraph';
 import { Button } from '@material-ui/core';
 import iconsTypes from '../../../helpers/iconsTypes';
+import routes from '../../../router/routes';
 import { AuthContext } from '../../../context';
 import { useStyles } from './StyledLoginForm';
 import { useContext } from 'react';
 
 const LoginForm = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const { signUpWithGoogle, logIn } = useContext(AuthContext);
 
@@ -58,6 +62,12 @@ const LoginForm = () => {
           }
         >
           Login with google
+        </Button>
+      </div>
+      <div className={classes.register}>
+        <Paragraph>Don't have account?</Paragraph>
+        <Button color="primary" onClick={() => history.push(routes.register)}>
+          Sign Up
         </Button>
       </div>
     </form>

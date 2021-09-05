@@ -83,7 +83,7 @@ const Auth2ContextProvider = ({ children }) => {
     }
   }, [currentUser, gapi]);
 
-  const value = { gapiLogIn, gapiLogOut, adminUser, gapiLogIn };
+  const value = { gapiLogOut, adminUser, gapiLogIn };
   return (
     <Auth2Context.Provider value={value}>{children}</Auth2Context.Provider>
   );

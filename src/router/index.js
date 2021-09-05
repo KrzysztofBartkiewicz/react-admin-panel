@@ -10,6 +10,7 @@ import Settings from '../views/Settings';
 import DeletedOrders from '../views/DeletedOrders';
 import SingleEmail from '../views/SingleEmail';
 import Login from '../views/Login';
+import Register from '../views/Register';
 import Spinner from '../components/utils/Spinner';
 import NotFound from '../views/NotFound';
 
@@ -18,9 +19,7 @@ const Router = () => {
 
   const renderBrowserRouter = () => (
     <BrowserRouter>
-      {typeof currentUser === 'object' && (
-        <Redirect to={{ pathname: routes.home }} />
-      )}
+      {typeof currentUser === 'object' && <Redirect to={routes.home} />}
       <Switch>
         <PrivateRoute
           exact
@@ -54,6 +53,7 @@ const Router = () => {
           component={SingleEmail}
         />
         <Route path={routes.login} component={Login} />
+        <Route path={routes.register} component={Register} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

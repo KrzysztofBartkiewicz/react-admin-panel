@@ -10,6 +10,25 @@ const AuthContextProvider = ({ children }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
 
+  const signUp = (email, password, firstName, lastName) => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) =>
+        usersCollection
+          .doc(user.user.uid)
+          .set({
+            email,
+            firstName,
+            lastName,
+            password,
+          })
+          .then((user) => console.log('firestore: user created!', user))
+          .catch((err) => console.log('firestore: user creation error: ', err))
+      )
+      .then((user) => console.log('firebase: user created!', user))
+      .catch((err) => console.log('firebase: user creation error: ', err));
+  };
+
   const signUpWithGoogle = () => {
     auth
       .signInWithPopup(provider)
@@ -64,6 +83,7 @@ const AuthContextProvider = ({ children }) => {
   const value = {
     logOut,
     logIn,
+    signUp,
     signUpWithGoogle,
     currentUser,
   };

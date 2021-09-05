@@ -4,7 +4,6 @@ import NavigationTemplate from '../templates/NavigationTemplate';
 import routes from './routes';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log(typeof rest.isLogged);
   return (
     <NavigationTemplate>
       <Route

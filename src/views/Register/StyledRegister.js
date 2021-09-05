@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import Logo from '../../components/Logo';
 
-export const StyledLogin = styled.section`
+export const StyledRegister = styled.section`
   display: flex;
   width: 100vw;
 `;
 
-export const StyledLoginPanel = styled.div`
+export const StyledRegisterPanel = styled.div`
   width: 35%;
   height: 100vh;
   display: flex;

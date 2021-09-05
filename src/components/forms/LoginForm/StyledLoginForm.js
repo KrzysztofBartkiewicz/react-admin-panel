@@ -16,4 +16,9 @@ export const useStyles = makeStyles((theme) => ({
   loginBtn: {
     marginRight: '5rem',
   },
+  register: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
 }));
