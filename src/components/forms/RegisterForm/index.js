@@ -1,11 +1,12 @@
 import React from 'react';
-import { useFormik } from 'formik';
 import FormInput from '../FormInput';
 import Paragraph from '../../Paragraph';
 import { Button } from '@material-ui/core';
 import iconsTypes from '../../../helpers/iconsTypes';
 import routes from '../../../router/routes';
 import { AuthContext } from '../../../context';
+import { useFormik } from 'formik';
+import { signUpSchema } from '../validation';
 import { useStyles } from './StyledRegisterForm';
 import { useContext } from 'react';
 import { useHistory } from 'react-router';
@@ -21,11 +22,13 @@ const RegisterForm = () => {
       lastName: '',
       email: '',
       password: '',
+      confirmPassword: '',
     },
     onSubmit: ({ email, password, firstName, lastName }, { resetForm }) => {
       signUp(email, password, firstName, lastName);
       resetForm();
     },
+    validationSchema: signUpSchema,
   });
 
   return (
@@ -35,18 +38,21 @@ const RegisterForm = () => {
         value={formik.values.firstName}
         label="First Name"
         onChange={formik.handleChange}
+        errorMsg={formik.errors.firstName}
       />
       <FormInput
         name="lastName"
         value={formik.values.lastName}
         label="LastName"
         onChange={formik.handleChange}
+        errorMsg={formik.errors.lastName}
       />
       <FormInput
         name="email"
         value={formik.values.email}
         label="Email"
         onChange={formik.handleChange}
+        errorMsg={formik.errors.email}
       />
       <FormInput
         name="password"
@@ -54,6 +60,15 @@ const RegisterForm = () => {
         label="Password"
         onChange={formik.handleChange}
         type="password"
+        errorMsg={formik.errors.password}
+      />
+      <FormInput
+        name="confirmPassword"
+        value={formik.values.confirmPassword}
+        label="Confirm Password"
+        onChange={formik.handleChange}
+        type="password"
+        errorMsg={formik.errors.confirmPassword}
       />
       <div className={classes.btnWrapper}>
         <Button

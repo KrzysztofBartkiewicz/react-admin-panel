@@ -6,6 +6,7 @@ const mainTheme = {
     blueMenu: '#2D62ED',
     bluePrimary: '#00CCF2',
     blueLight: '#F4F7FE',
+    red: '#dc004e',
     pink: '#FF007C',
     velvet: '#7D00B5',
     grey: '#c3c3c3',
