@@ -12,3 +12,12 @@ export const capitalizeAll = (str) => {
     .map((word) => `${word[0].toUpperCase()}${word.slice(1)}`)
     .join(' ');
 };
+
+export const formatError = (err) => {
+  return [...err.split('/')]
+    .filter((el, index) => index === 1)
+    .toString()
+    .split('-')
+    .map((word) => capitalize(word))
+    .join(' ');
+};

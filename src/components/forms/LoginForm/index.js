@@ -1,25 +1,26 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import FormInput from '../FormInput';
 import Paragraph from '../../Paragraph';
 import { Button } from '@material-ui/core';
+import { useContext } from 'react';
+import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
+import { formatError } from '../../../helpers';
 import iconsTypes from '../../../helpers/iconsTypes';
 import routes from '../../../router/routes';
 import { AuthContext } from '../../../context';
-import { useStyles } from './StyledLoginForm';
-import { useContext } from 'react';
+import { StyledError, useStyles } from './StyledLoginForm';
 
 const LoginForm = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { signUpWithGoogle, logIn } = useContext(AuthContext);
+  const { signUpWithGoogle, logIn, loginError } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'johndoe564654@gmail.com',
+      password: 'JohnDoeAdmin123',
     },
     onSubmit: ({ email, password }, { resetForm }) => {
       logIn(email, password);
@@ -29,6 +30,7 @@ const LoginForm = () => {
 
   return (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
+      {loginError && <StyledError>{formatError(loginError.code)}</StyledError>}
       <FormInput
         name="email"
         value={formik.values.email}

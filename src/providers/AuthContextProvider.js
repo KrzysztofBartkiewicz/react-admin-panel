@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthContext } from '../context';
 import { auth, provider } from '../firebase/firebaseConfig';
@@ -9,6 +9,8 @@ import { getCurrentUser } from '../redux/appReducer/selectors';
 const AuthContextProvider = ({ children }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);
+
+  const [loginError, setLoginError] = useState(null);
 
   const signUp = (email, password, firstName, lastName) => {
     auth
@@ -38,13 +40,31 @@ const AuthContextProvider = ({ children }) => {
       .catch((err) => console.log('firebase :', err));
   };
 
+  // const logIn = (email, password) =>
+  //   new Promise((resolve, reject) => {
+  //     auth
+  //       .signInWithEmailAndPassword(email, password)
+  //       .then((user) => {
+  //         console.log('firebase: user sign in!', user);
+  //         resolve(user);
+  //       })
+  //       .catch((err) => {
+  //         console.log('firebase login error:', err);
+  //         reject(err);
+  //       });
+  //   });
+
   const logIn = (email, password) => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
         console.log('firebase: user sign in!', user);
+        setLoginError(null);
       })
-      .catch((err) => console.log('firebase :', err));
+      .catch((err) => {
+        console.log('firebase login error:', err);
+        setLoginError(err);
+      });
   };
 
   const logOut = () => {
@@ -85,6 +105,7 @@ const AuthContextProvider = ({ children }) => {
     logIn,
     signUp,
     signUpWithGoogle,
+    loginError,
     currentUser,
   };
 
