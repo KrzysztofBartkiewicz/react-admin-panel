@@ -11,6 +11,7 @@ const AuthContextProvider = ({ children }) => {
   const currentUser = useSelector(getCurrentUser);
 
   const [loginError, setLoginError] = useState(null);
+  const [registerError, settRegisterError] = useState(null);
 
   const signUp = (email, password, firstName, lastName) => {
     auth
@@ -27,8 +28,14 @@ const AuthContextProvider = ({ children }) => {
           .then((user) => console.log('firestore: user created!', user))
           .catch((err) => console.log('firestore: user creation error: ', err))
       )
-      .then((user) => console.log('firebase: user created!', user))
-      .catch((err) => console.log('firebase: user creation error: ', err));
+      .then((user) => {
+        console.log('firebase: user created!', user);
+        settRegisterError(null);
+      })
+      .catch((err) => {
+        console.log('firebase: user creation error: ', err);
+        settRegisterError(err);
+      });
   };
 
   const signUpWithGoogle = () => {
@@ -39,20 +46,6 @@ const AuthContextProvider = ({ children }) => {
       })
       .catch((err) => console.log('firebase :', err));
   };
-
-  // const logIn = (email, password) =>
-  //   new Promise((resolve, reject) => {
-  //     auth
-  //       .signInWithEmailAndPassword(email, password)
-  //       .then((user) => {
-  //         console.log('firebase: user sign in!', user);
-  //         resolve(user);
-  //       })
-  //       .catch((err) => {
-  //         console.log('firebase login error:', err);
-  //         reject(err);
-  //       });
-  //   });
 
   const logIn = (email, password) => {
     auth
@@ -105,6 +98,7 @@ const AuthContextProvider = ({ children }) => {
     logIn,
     signUp,
     signUpWithGoogle,
+    registerError,
     loginError,
     currentUser,
   };

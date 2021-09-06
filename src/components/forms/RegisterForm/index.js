@@ -2,19 +2,21 @@ import React from 'react';
 import FormInput from '../FormInput';
 import Paragraph from '../../Paragraph';
 import { Button } from '@material-ui/core';
-import iconsTypes from '../../../helpers/iconsTypes';
-import routes from '../../../router/routes';
-import { AuthContext } from '../../../context';
+import { useHistory } from 'react-router';
 import { useFormik } from 'formik';
-import { signUpSchema } from '../validation';
 import { useStyles } from './StyledRegisterForm';
 import { useContext } from 'react';
-import { useHistory } from 'react-router';
+import iconsTypes from '../../../helpers/iconsTypes';
+import routes from '../../../router/routes';
+import { formatError } from '../../../helpers';
+import { AuthContext } from '../../../context';
+import { signUpSchema } from '../validation';
+import { StyledError } from './StyledRegisterForm';
 
 const RegisterForm = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { signUp, signUpWithGoogle } = useContext(AuthContext);
+  const { signUp, signUpWithGoogle, registerError } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
@@ -33,6 +35,9 @@ const RegisterForm = () => {
 
   return (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
+      {registerError && (
+        <StyledError>{formatError(registerError.code)}</StyledError>
+      )}
       <FormInput
         name="firstName"
         value={formik.values.firstName}

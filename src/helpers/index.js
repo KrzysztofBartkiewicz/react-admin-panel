@@ -18,6 +18,6 @@ export const formatError = (err) => {
     .filter((el, index) => index === 1)
     .toString()
     .split('-')
-    .map((word) => capitalize(word))
+    .map((word, index) => (index === 0 ? capitalize(word) : word))
     .join(' ');
 };
