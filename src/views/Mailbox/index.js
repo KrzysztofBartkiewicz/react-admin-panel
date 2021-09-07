@@ -1,19 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
-import routes from '../../router/routes';
-import { ArrowLeft, ArrowRight } from '@material-ui/icons';
+import Pagination from '../../components/shared/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsThreadChecked } from '../../redux/gmailReducer/actions';
 import { getThreads } from '../../redux/gmailReducer/selectors';
 import { Auth2Context } from '../../context';
-import { Button, IconButton } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import {
   StyledMailbox,
   StyledMailContainer,
   StyledListItem,
   StyledFrom,
   StyledDate,
-  StyledPaginButtons,
   StyledItemContainer,
   StyledMailboxWrapper,
   StyledAuthWrapper,
@@ -95,14 +93,7 @@ const Mailbox = () => {
         <MailboxNav onClick={handleClickLabel} activeLabel={activeLabel} />
         <StyledItemContainer>
           <StyledMailContainer>
-            <StyledPaginButtons>
-              <IconButton onClick={() => handlePagination('left')}>
-                <ArrowLeft style={{ fontSize: 40 }} />
-              </IconButton>
-              <IconButton onClick={() => handlePagination('right')}>
-                <ArrowRight style={{ fontSize: 40 }} />
-              </IconButton>
-            </StyledPaginButtons>
+            <Pagination onClick={handlePagination} />
 
             {threadsToRender &&
               threadsToRender.map(

@@ -63,7 +63,3 @@ export const StyledDate = styled.span`
 `;
 
 export const StyledLink = styled(NavLink)``;
-
-export const StyledPaginButtons = styled.div`
-  display: flex;
-`;
