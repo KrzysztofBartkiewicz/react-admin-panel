@@ -6,6 +6,14 @@ import ItemContainer from '../../components/ItemContainer';
 
 export const StyledMailbox = styled.section`
   ${({ theme }) => theme.mixins.views}
+`;
+
+export const StyledAuthButtons = styled.div`
+  display: flex;
+  margin-bottom: 3rem;
+`;
+
+export const StyledMailboxWrapper = styled.div`
   display: flex;
 `;
 

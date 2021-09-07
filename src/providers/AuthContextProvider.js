@@ -14,6 +14,7 @@ const AuthContextProvider = ({ children }) => {
   const [registerError, settRegisterError] = useState(null);
 
   const signUp = (email, password, firstName, lastName) => {
+    dispatch(setCurrentUser(null));
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((user) =>
@@ -48,6 +49,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const logIn = (email, password) => {
+    dispatch(setCurrentUser(null));
     auth
       .signInWithEmailAndPassword(email, password)
       .then((user) => {

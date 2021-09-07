@@ -4,6 +4,7 @@ const initialState = {
   threads: [],
   labels: [],
   messages: [],
+  clientInitialized: false,
 };
 
 const gmailReducer = (state = initialState, actions) => {
@@ -31,6 +32,12 @@ const gmailReducer = (state = initialState, actions) => {
       return {
         ...state,
         threads: mappedThreads,
+      };
+
+    case actionsTypes.SET_CLIENT_STATUS:
+      return {
+        ...state,
+        clientInitialized: payload,
       };
 
     default:

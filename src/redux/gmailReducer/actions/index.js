@@ -14,3 +14,8 @@ export const setIsThreadChecked = (id) => ({
   type: actionsTypes.SET_IS_THREAD_CHECKED,
   payload: id,
 });
+
+export const setClientStatus = (value) => ({
+  type: actionsTypes.SET_CLIENT_STATUS,
+  payload: value,
+});

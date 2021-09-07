@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Auth2Context, AuthContext } from '../context';
 import { setAdminUser } from '../redux/appReducer/actions';
 import { getAdminUser } from '../redux/appReducer/selectors';
+import { setClientStatus } from '../redux/gmailReducer/actions';
+import { getClientStatus } from '../redux/gmailReducer/selectors';
 
 const gapi = window.gapi;
 
 const Auth2ContextProvider = ({ children }) => {
   const dispatch = useDispatch();
   const adminUser = useSelector(getAdminUser);
+  const isClientInitialized = useSelector(getClientStatus);
   const { currentUser } = useContext(AuthContext);
 
   const gapiLogIn = () => {
@@ -69,6 +72,7 @@ const Auth2ContextProvider = ({ children }) => {
           scope:
             'https://mail.google.com/ https://www.googleapis.com/auth/gmail.labels https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.compose',
         })
+        .then(() => dispatch(setClientStatus(true)))
         .then(() => console.log('gapi: client initialized'))
         .then(() => {
           const auth2 = gapi.auth2.getAuthInstance();
@@ -83,7 +87,7 @@ const Auth2ContextProvider = ({ children }) => {
     }
   }, [currentUser, gapi]);
 
-  const value = { gapiLogOut, adminUser, gapiLogIn };
+  const value = { gapiLogOut, adminUser, isClientInitialized, gapiLogIn };
   return (
     <Auth2Context.Provider value={value}>{children}</Auth2Context.Provider>
   );
