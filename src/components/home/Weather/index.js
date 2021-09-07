@@ -1,11 +1,11 @@
 import React, { createElement } from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { getWeather } from '../../redux/appReducer/selectors';
-import { capitalizeAll } from '../../helpers';
-import getWeatherIcon from '../../helpers/weatherIcons';
-import Paragraph from '../Paragraph';
-import Spinner from '../utils/Spinner';
+import { getWeather } from '../../../redux/appReducer/selectors';
+import { capitalizeAll } from '../../../helpers';
+import getWeatherIcon from '../../../helpers/weatherIcons';
+import Paragraph from '../../shared/Paragraph';
+import Spinner from '../../utils/Spinner';
 import {
   StyledCurrentDecs,
   StyledCurrentTemp,

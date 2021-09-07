@@ -1,6 +1,6 @@
 import React from 'react';
 import FormInput from '../FormInput';
-import Paragraph from '../../Paragraph';
+import Paragraph from '../../shared/Paragraph';
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { useFormik } from 'formik';
@@ -10,7 +10,7 @@ import iconsTypes from '../../../helpers/iconsTypes';
 import routes from '../../../router/routes';
 import { formatError } from '../../../helpers';
 import { AuthContext } from '../../../context';
-import { signUpSchema } from '../validation';
+import { signUpSchema } from '../../../validation';
 import { StyledError } from './StyledRegisterForm';
 
 const RegisterForm = () => {

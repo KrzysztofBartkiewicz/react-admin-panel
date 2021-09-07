@@ -1,6 +1,6 @@
 import React from 'react';
-import RegisterForm from '../../components/forms/RegisterForm';
-import Background from '../../components/Background';
+import RegisterForm from '../../components/shared/RegisterForm';
+import Background from '../../components/shared/Background';
 import {
   StyledLogo,
   StyledRegister,

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Logo from '../../components/Logo';
+import Logo from '../../components/shared/Logo';
 
 export const StyledRegister = styled.section`
   display: flex;

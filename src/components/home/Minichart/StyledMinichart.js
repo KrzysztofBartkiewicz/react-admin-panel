@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
-import ItemContainer from '../../ItemContainer';
+import ItemContainer from '../../shared/ItemContainer';
 
 export const StyledWrapper = styled(ItemContainer)`
   position: relative;

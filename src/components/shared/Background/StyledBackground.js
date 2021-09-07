@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import bg from '../../assets/images/Hexagon.svg';
+import bg from '../../../assets/images/Hexagon.svg';
 
 export const StyledBg = styled.div`
   width: 65%;

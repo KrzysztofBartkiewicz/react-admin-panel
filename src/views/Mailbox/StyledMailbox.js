@@ -1,16 +1,24 @@
 import styled, { css } from 'styled-components';
-import emailIcons from '../../helpers/emailIcons';
 import { NavLink } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import ItemContainer from '../../components/ItemContainer';
+import ItemContainer from '../../components/shared/ItemContainer';
 
 export const StyledMailbox = styled.section`
   ${({ theme }) => theme.mixins.views}
 `;
 
-export const StyledAuthButtons = styled.div`
+export const StyledAuthWrapper = styled.div`
   display: flex;
+  align-items: center;
   margin-bottom: 3rem;
+`;
+
+export const StyledLoginInfo = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.l};
+  margin-left: 3rem;
+
+  span {
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+  }
 `;
 
 export const StyledMailboxWrapper = styled.div`
@@ -29,9 +37,11 @@ export const StyledListItem = styled.li`
   span {
     display: block;
 
-    ${({ theme }) => css`
+    ${({ theme, unread }) => css`
       font-size: ${theme.fontSizes.l};
-      font-weight: ${theme.fontWeights.bold};
+      font-weight: ${unread
+        ? theme.fontWeights.bold
+        : theme.fontWeights.regular};
     `}
   }
 `;
@@ -54,42 +64,6 @@ export const StyledDate = styled.span`
 
 export const StyledLink = styled(NavLink)``;
 
-export const StyledNav = styled(ItemContainer)`
-  min-width: 25rem;
-  max-height: 30rem;
-  margin-right: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const iconStyles = css`
-  width: 3rem;
-  height: 3rem;
-`;
-
-export const StyledMailIcon = styled(emailIcons.MailIcon)`
-  ${iconStyles}
-`;
-
-export const StyledDraftIcon = styled(emailIcons.DraftIcon)`
-  ${iconStyles}
-`;
-
-export const StyledTrashIcon = styled(emailIcons.TrashIcon)`
-  ${iconStyles}
-`;
-
-export const StyledSentIcon = styled(emailIcons.SentIcon)`
-  ${iconStyles}
-`;
-
 export const StyledPaginButtons = styled.div`
   display: flex;
 `;
-
-export const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-}));

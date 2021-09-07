@@ -1,5 +1,5 @@
 import React from 'react';
-import OrdersTable from '../../components/tables/MaterialTable';
+import OrdersTable from '../../components/shared/Table';
 import { StyledOrders } from './StyledOrders';
 import {
   handleDialogVisibility,

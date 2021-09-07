@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormInput from '../FormInput';
-import Paragraph from '../../Paragraph';
+import Paragraph from '../../shared/Paragraph';
 import { Button } from '@material-ui/core';
 import { useContext } from 'react';
 import { useFormik } from 'formik';

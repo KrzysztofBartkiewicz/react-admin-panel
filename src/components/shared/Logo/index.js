@@ -1,5 +1,5 @@
 import React from 'react';
-import iconsTypes from '../../helpers/iconsTypes';
+import iconsTypes from '../../../helpers/iconsTypes';
 import { StyledLogo, StyledLogoText } from './StyledLogo';
 
 const Logo = ({ color, className, big }) => {

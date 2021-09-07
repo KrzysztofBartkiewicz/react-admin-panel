@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Minichart from '../../components/charts/Minichart';
-import SaleChart from '../../components/charts/SaleChart';
-import Weather from '../../components/Weather';
+import Minichart from '../../components/home/Minichart';
+import SaleChart from '../../components/home/SaleChart';
+import Weather from '../../components/home/Weather';
 
 export const StyledHome = styled.section`
   ${({ theme }) => theme.mixins.views};

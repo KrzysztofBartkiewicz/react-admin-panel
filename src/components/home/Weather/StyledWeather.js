@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ItemContainer from '../ItemContainer';
-import Heading from '../Heading';
+import ItemContainer from '../../shared/ItemContainer';
+import Heading from '../../shared/Heading';
 
 export const StyledWeather = styled(ItemContainer)`
   padding: 2rem;

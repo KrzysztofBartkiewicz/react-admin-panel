@@ -1,5 +1,5 @@
 import React from 'react';
-import OrdersTable from '../../components/tables/MaterialTable';
+import OrdersTable from '../../components/shared/Table';
 import { StyledDeleted } from './StyledFilter';
 import { ordersCells } from '../../helpers/tableCells';
 import { useSelector, useDispatch } from 'react-redux';

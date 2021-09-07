@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
-import EditBox from '../components/EditBox';
+import Navbar from '../components/shared/Navbar';
+import EditBox from '../components/shared/EditBox';
 import Modal from '../components/utils/MaterialModal';
-import ItemsTable from '../components/tables/MaterialTable';
+import ItemsTable from '../components/shared/Table';
 import CustomPopover from '../components/utils/CustomPopover';
 import AlertDialog from '../components/utils/MaterialDialog';
-import AppBar from '../components/AppBar';
+import AppBar from '../components/shared/AppBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsCells } from '../helpers/tableCells';
 import { deleteOrders } from '../firebase/firestoreUtils';

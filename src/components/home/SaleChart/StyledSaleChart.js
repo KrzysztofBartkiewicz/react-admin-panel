@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ItemContainer from '../../ItemContainer';
+import ItemContainer from '../../shared/ItemContainer';
 
 export const StyledSaleChart = styled(ItemContainer)`
   position: relative;

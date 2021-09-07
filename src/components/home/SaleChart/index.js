@@ -8,7 +8,7 @@ import {
   VerticalBarSeries,
 } from 'react-vis';
 import '../../../../node_modules/react-vis/dist/style.css';
-import Heading from '../../Heading';
+import Heading from '../../shared/Heading';
 import Button from '@material-ui/core/Button';
 import Spinner from '../../utils/Spinner';
 import { getPercent } from '../../../helpers';

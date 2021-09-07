@@ -10,21 +10,16 @@ import { Button, IconButton } from '@material-ui/core';
 import {
   StyledMailbox,
   StyledMailContainer,
-  StyledLink,
-  StyledNav,
-  StyledMailIcon,
-  StyledSentIcon,
-  StyledDraftIcon,
-  StyledTrashIcon,
-  useStyles,
   StyledListItem,
   StyledFrom,
   StyledDate,
   StyledPaginButtons,
   StyledItemContainer,
   StyledMailboxWrapper,
-  StyledAuthButtons,
+  StyledAuthWrapper,
+  StyledLoginInfo,
 } from './StyledMailbox';
+import MailboxNav from '../../components/mailbox/MailboxNav';
 
 const threadsByPage = 15;
 
@@ -39,7 +34,6 @@ const makeShorter = (str, length) => {
 const Mailbox = () => {
   const threads = useSelector(getThreads);
   const dispatch = useDispatch();
-  const classes = useStyles();
   const { gapiLogIn, gapiLogOut, adminUser, isClientInitialized } =
     useContext(Auth2Context);
 
@@ -76,54 +70,29 @@ const Mailbox = () => {
   return (
     <StyledMailbox>
       {isClientInitialized && (
-        <StyledAuthButtons>
+        <StyledAuthWrapper>
           {adminUser ? (
-            <Button onClick={gapiLogOut} variant="contained" color="secondary">
-              Logout from mailbox
-            </Button>
+            <>
+              <Button
+                onClick={gapiLogOut}
+                variant="contained"
+                color="secondary"
+              >
+                Logout from mailbox
+              </Button>
+              <StyledLoginInfo>
+                You're logged to <span>{adminUser.email}</span>
+              </StyledLoginInfo>
+            </>
           ) : (
             <Button onClick={gapiLogIn} variant="contained" color="primary">
               Login to mailbox
             </Button>
           )}
-        </StyledAuthButtons>
+        </StyledAuthWrapper>
       )}
       <StyledMailboxWrapper>
-        <StyledNav>
-          <Button
-            startIcon={<StyledMailIcon />}
-            className={classes.button}
-            onClick={() => handleClickLabel('INBOX')}
-            disabled={activeLabel === 'INBOX'}
-          >
-            Inbox
-          </Button>
-          <Button
-            startIcon={<StyledSentIcon />}
-            className={classes.button}
-            onClick={() => handleClickLabel('SENT')}
-            disabled={activeLabel === 'SENT'}
-          >
-            Sent
-          </Button>
-          <Button
-            startIcon={<StyledDraftIcon />}
-            className={classes.button}
-            onClick={() => handleClickLabel('DRAFT')}
-            disabled={activeLabel === 'DRAFT'}
-          >
-            Draft
-          </Button>
-          <Button
-            startIcon={<StyledTrashIcon />}
-            className={classes.button}
-            onClick={() => handleClickLabel('TRASH')}
-            disabled={activeLabel === 'TRASH'}
-          >
-            Trash
-          </Button>
-        </StyledNav>
-
+        <MailboxNav onClick={handleClickLabel} activeLabel={activeLabel} />
         <StyledItemContainer>
           <StyledMailContainer>
             <StyledPaginButtons>
@@ -137,9 +106,12 @@ const Mailbox = () => {
 
             {threadsToRender &&
               threadsToRender.map(
-                ({ id, subject, date, from, isChecked }, index) =>
+                ({ id, subject, date, from, isChecked, messagesArr }, index) =>
                   index >= pagination - threadsByPage && index < pagination ? (
-                    <StyledListItem key={id}>
+                    <StyledListItem
+                      unread={messagesArr[0].labelIds.includes('UNREAD')}
+                      key={id}
+                    >
                       <Checkbox
                         color="primary"
                         checked={isChecked}
