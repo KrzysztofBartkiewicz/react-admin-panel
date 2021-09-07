@@ -14,6 +14,10 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useStyles } from './Styles';
+import { useSelector } from 'react-redux';
+import { getUnreadQuantity } from '../../../redux/gmailReducer/selectors';
+import routes from '../../../router/routes';
+import { useHistory } from 'react-router';
 
 const PrimarySearchAppBar = () => {
   const classes = useStyles();
@@ -24,6 +28,9 @@ const PrimarySearchAppBar = () => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const { logOut } = useContext(AuthContext);
+
+  const unreadQuantity = useSelector(getUnreadQuantity);
+  const history = useHistory();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -133,8 +140,12 @@ const PrimarySearchAppBar = () => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+            <IconButton
+              aria-label="show 4 new mails"
+              color="inherit"
+              onClick={() => history.push(routes.mailbox)}
+            >
+              <Badge badgeContent={unreadQuantity} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>

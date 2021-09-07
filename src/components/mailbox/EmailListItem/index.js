@@ -16,7 +16,7 @@ const EmailListItem = ({ unread, checked, subject, id, date, from }) => {
   const dispatch = useDispatch();
 
   return (
-    <StyledListItem unread={unread} key={id}>
+    <StyledListItem unread={unread}>
       <Checkbox
         color="primary"
         checked={checked}

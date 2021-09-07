@@ -1,46 +1,126 @@
 import moment from 'moment';
 
-const gapi = window.gapi;
+// const gapi = window.gapi;
 
-export const fetchLabels = async () => {
-  const gmailApi = gapi.client.gmail.users;
+// export const fetchLabels = async () => {
+//   const gmailApi = gapi.client.gmail.users;
 
-  const labels = await gmailApi.labels.list({ userId: 'me' });
+//   const labels = await gmailApi.labels.list({ userId: 'me' });
 
-  return labels.result.labels;
-};
+//   return labels.result.labels;
+// };
 
-export const patchTrashLabel = async () => {
-  const gmailApi = gapi.client.gmail.users;
+// export const patchTrashLabel = async () => {
+//   const gmailApi = gapi.client.gmail.users;
 
-  const returned = await gmailApi.labels.patch({
-    userId: 'me',
-    id: 'TRASH',
+//   const returned = await gmailApi.labels.patch({
+//     userId: 'me',
+//     id: 'TRASH',
 
-    resource: {
-      labelListVisibility: 'labelShow',
-    },
-  });
+//     resource: {
+//       labelListVisibility: 'labelShow',
+//     },
+//   });
 
-  return returned;
-};
+//   return returned;
+// };
 
-export const fetchThreads = async () => {
-  const threadsPromisesArr = [];
+// export const fetchThreads = async () => {
+//   const threadsPromisesArr = [];
 
-  const gmailApi = gapi.client.gmail.users;
-  const threadsList = await gmailApi.threads.list({
-    userId: 'me',
-    maxResults: 500,
-    includeSpamTrash: true,
-  });
+//   const gmailApi = gapi.client.gmail.users;
+//   const threadsList = await gmailApi.threads.list({
+//     userId: 'me',
+//     maxResults: 500,
+//     includeSpamTrash: true,
+//   });
 
-  threadsList.result.threads.forEach(({ id }) =>
-    threadsPromisesArr.push(gmailApi.threads.get({ userId: 'me', id }))
-  );
+//   threadsList.result.threads.forEach(({ id }) =>
+//     threadsPromisesArr.push(gmailApi.threads.get({ userId: 'me', id }))
+//   );
 
-  const threads = await Promise.all(threadsPromisesArr);
+//   const threads = await Promise.all(threadsPromisesArr);
 
+//   return threads.map(({ result }) => {
+//     const id = result.id;
+
+//     const date = moment(
+//       result.messages[0].payload.headers.find(
+//         (header) => header.name === 'Date'
+//       ).value,
+//       'ddd, DD MMM YYYY'
+//     ).format('ddd, D MMM YYYY');
+
+//     const from = result.messages[0].payload.headers.find(
+//       (header) => header.name === 'From'
+//     ).value;
+
+//     const subject = result.messages[0].payload.headers.find(
+//       (header) => header.name === 'Subject'
+//     ).value;
+
+//     const messagesArr = result.messages;
+
+//     return {
+//       id,
+//       date,
+//       subject,
+//       messagesArr,
+//       isChecked: false,
+//       from,
+//     };
+//   });
+// };
+
+// export const fetchEmailsBasicData = async () => {
+//   const messagesPromiseArr = [];
+
+//   const gmailApi = gapi.client.gmail.users;
+//   const messagesList = await gmailApi.messages.list({
+//     userId: 'me',
+//     maxResults: 500,
+//   });
+
+//   messagesList.result.messages.forEach(({ id }) =>
+//     messagesPromiseArr.push(gmailApi.messages.get({ userId: 'me', id }))
+//   );
+
+//   const messages = await Promise.all(messagesPromiseArr);
+
+//   const emailsBasicData = messages.map(({ result }) => {
+//     const headers = result.payload.headers;
+//     const id = result.id;
+
+//     const subject = headers.find((header) => header.name === 'Subject').value;
+//     const date = headers.find((header) => header.name === 'Date').value;
+//     const from = headers.find((header) => header.name === 'From').value;
+
+//     return {
+//       id,
+//       subject,
+//       date: moment(date, 'ddd, DD MMM YYYY').format('ddd, D MMM YYYY'),
+//       from: from
+//         .split(' ')
+//         .filter((word) => word[0] !== '<')
+//         .join(' '),
+//     };
+//   });
+
+//   return emailsBasicData;
+// };
+
+// export const fetchSingleEmail = async (id) => {
+//   const gmailApi = gapi.client.gmail.users;
+
+//   const singleEmail = await gmailApi.messages.get({
+//     userId: 'me',
+//     id,
+//   });
+
+//   return singleEmail;
+// };
+
+export const formatThreads = (threads) => {
   return threads.map(({ result }) => {
     const id = result.id;
 
@@ -72,50 +152,11 @@ export const fetchThreads = async () => {
   });
 };
 
-export const fetchEmailsBasicData = async () => {
-  const messagesPromiseArr = [];
-
-  const gmailApi = gapi.client.gmail.users;
-  const messagesList = await gmailApi.messages.list({
-    userId: 'me',
-    maxResults: 500,
-  });
-
-  messagesList.result.messages.forEach(({ id }) =>
-    messagesPromiseArr.push(gmailApi.messages.get({ userId: 'me', id }))
-  );
-
-  const messages = await Promise.all(messagesPromiseArr);
-
-  const emailsBasicData = messages.map(({ result }) => {
-    const headers = result.payload.headers;
-    const id = result.id;
-
-    const subject = headers.find((header) => header.name === 'Subject').value;
-    const date = headers.find((header) => header.name === 'Date').value;
-    const from = headers.find((header) => header.name === 'From').value;
-
-    return {
-      id,
-      subject,
-      date: moment(date, 'ddd, DD MMM YYYY').format('ddd, D MMM YYYY'),
-      from: from
-        .split(' ')
-        .filter((word) => word[0] !== '<')
-        .join(' '),
-    };
-  });
-
-  return emailsBasicData;
-};
-
-export const fetchSingleEmail = async (id) => {
-  const gmailApi = gapi.client.gmail.users;
-
-  const singleEmail = await gmailApi.messages.get({
-    userId: 'me',
-    id,
-  });
-
-  return singleEmail;
+export const countUnreadThreads = (threads) => {
+  return threads.reduce((acc, curr) => {
+    if (curr.result.messages[0].labelIds.includes('UNREAD')) {
+      return acc + 1;
+    }
+    return acc;
+  }, 0);
 };

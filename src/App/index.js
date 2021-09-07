@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import GlobalStylesTemplate from '../templates/GlobalStylesTemplate';
 import Router from '../router';
 import axios from 'axios';
@@ -12,11 +12,12 @@ import {
   setOrders,
   setWeather,
 } from '../redux/appReducer/actions';
-import { setThreads } from '../redux/gmailReducer/actions';
+import { setThreads, setUnreadQuantity } from '../redux/gmailReducer/actions';
 import { getOWEndpoint } from '../helpers/urls';
 import ordersData from '../data/data.json';
 import { Auth2Context } from '../context';
-import { fetchThreads } from '../utils/gmail';
+import { fetchThreads } from '../api/gmail';
+import { formatThreads, countUnreadThreads } from '../utils/gmail';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,12 @@ const App = () => {
   useEffect(() => {
     if (adminUser) {
       fetchThreads()
-        .then((threads) => dispatch(setThreads(threads)))
+        .then((threads) => {
+          const unreadThreadsQuantity = countUnreadThreads(threads);
+          const formattedThreads = formatThreads(threads);
+          dispatch(setThreads(formattedThreads));
+          dispatch(setUnreadQuantity(unreadThreadsQuantity));
+        })
         .catch((err) => console.log(err));
     }
   }, [adminUser]);

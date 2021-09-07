@@ -4,6 +4,7 @@ const initialState = {
   threads: [],
   labels: [],
   messages: [],
+  unreadQuantity: 0,
   clientInitialized: false,
 };
 
@@ -38,6 +39,12 @@ const gmailReducer = (state = initialState, actions) => {
       return {
         ...state,
         clientInitialized: payload,
+      };
+
+    case actionsTypes.SET_UNREAD_QUANTITY:
+      return {
+        ...state,
+        unreadQuantity: payload,
       };
 
     default:

@@ -19,3 +19,8 @@ export const setClientStatus = (value) => ({
   type: actionsTypes.SET_CLIENT_STATUS,
   payload: value,
 });
+
+export const setUnreadQuantity = (value) => ({
+  type: actionsTypes.SET_UNREAD_QUANTITY,
+  payload: value,
+});
