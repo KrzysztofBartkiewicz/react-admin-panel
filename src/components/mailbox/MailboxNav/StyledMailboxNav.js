@@ -13,8 +13,8 @@ export const StyledNav = styled(ItemContainer)`
 `;
 
 const iconStyles = css`
-  width: 3rem;
-  height: 3rem;
+  width: 1.8rem;
+  height: 1.8rem;
 `;
 
 export const StyledMailIcon = styled(emailIcons.MailIcon)`
